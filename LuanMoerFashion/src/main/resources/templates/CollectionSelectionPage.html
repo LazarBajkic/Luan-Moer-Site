@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="MainCss.css">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Collection select</title>
+</head>
+<body>
+	
+	<th:block th:replace="~{layout::header}"></th:block>
+	
+	<div class="selection-wrapper">
+		
+		<div class="collection-choice">
+	
+	<a class="collection-link select-women-collection" th:href="@{/Collection}">
+	<span>Ženska kolekcija</span>
+	</a>
+	
+	<a class="collection-link select-men-collection" th:href="@{/Collection}">
+	<span>Muška kolekcija</span>
+	</a>
+	
+	</div>
+		
+	</div>
+	
+	<th:block th:replace="~{layout::footer}"></th:block>
+	
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="MainCss.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>Contact</title>
+</head>
+<body>
+
+    <th:block th:replace="~{layout::header}"></th:block>
+
+    <div class="selection-wrapper">
+ 	
+ 	<h2 class="contact-us-title">Kontakt</h2>
+ 	
+        <div class="contact-choice">
+           
+           
+            <button class="FAQ-option" id="faq" onclick="showBlock('faq','faq-items','write-option','write-block')">
+                <span>FAQ</span>        
+            </button>
+		
+		 <div class="faq-items" id="faq-items" style="display: none;">
+            
+             <div class="faq-item">
+            	<div class="faq-question">
+            		<span>Pitanje 1</span>
+            		<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            </div>
+                <div class="faq-answer">Odgovor 1</div>
+            </div>
+            
+            <div class="faq-item">
+            	<div class="faq-question">
+            		<span>Pitanje 2</span>
+            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            </div>
+                <div class="faq-answer">Odgovor 2</div>
+            </div>
+            
+            <div class="faq-item">
+            	<div class="faq-question">
+            		<span>Pitanje 3</span>
+            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            </div>
+                <div class="faq-answer">Odgovor 3</div>
+            </div>
+            
+            <div class="faq-item">
+            	<div class="faq-question">
+            		<span>Pitanje 4</span>
+            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            </div>
+                <div class="faq-answer">Odgovor 4</div>
+            </div>
+            
+            <div class="faq-item">
+            	<div class="faq-question">
+            		<span>Pitanje 5</span>
+            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            </div>
+                <div class="faq-answer">Odgovor 5</div>
+            </div>
+            
+              </div>
+      
+          
+            <button class="write-option" id="write-option" onclick="showBlock('write-option','write-block','faq','faq-items')">
+                <span>Pišite nam</span>
+            </button>
+        </div>
+
+       
+        <div class="write-block" id="write-block" style="display: none;">
+        	
+        <form>
+        		
+        	<div class="fullname">
+        		
+        		<input type="text" placeholder="Ime" class="credentials">
+        		<input type="text" placeholder="Prezime" class="credentials">
+        		
+        	</div>
+        	
+        	<input type="email"  placeholder="Email" class="credentials">
+        	
+        	<textarea rows="4" placeholder="Napišite poruku" class="user-text"></textarea>
+        	
+        	<button type="submit" class="send-button">Pošalji</button>
+        	
+          </form>
+        	
+        </div>
+        
+    </div>
+
+	<div class="contact-email-div">
+		
+		<span>LuanMoer@gmail.com</span>
+		
+	</div>
+
+    <th:block th:replace="~{layout::footer}"></th:block>
+
+    <script src="Script2.js"></script>
+
+</body>
+</html>

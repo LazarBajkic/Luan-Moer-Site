@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="MainCss.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:fragment="header">
+	
+        <nav class="NavBar">
+    
+    	<div class="link-container">
+    		
+    		<a class="navbar-brand" id="default" th:href="@{/CollectionSelection}">Kolekcija</a>   
+			
+			<a class="icon-container cart-container" th:href="@{/CartPage}"></a>
+						
+		
+			<a class="icon-container heart-container" th:href="@{/FavoritesPage}">
+				<div class="favorites-popup">			
+	  				<ul class="favorites-minilist">
+      					<li>
+      						<img src="MuskarciSlika2.png">
+      						<div class="minifavorite-info">
+	      						<span>Ime</span>
+								<span>L</span>
+								<span>4999 RSD</span>	
+      						</div>
+      					
+      					</li>
+					    <li>
+      						<img src="MuskarciSlika2.png">
+      						<div class="minifavorite-info">
+	      						<span>Ime</span>
+								<span>L</span>
+								<span>4999 RSD</span>	
+      						</div>
+      					</li>
+      					<li>
+      						<img src="MuskarciSlika2.png">
+      						<div class="minifavorite-info">
+	      						<span>Ime</span>
+								<span>L</span>
+								<span>4999 RSD</span>	
+      						</div>
+      					</li>
+      				</ul>
+  				</div>
+			</a>
+								
+    	</div>
+        
+        <div class="logo-container">
+			<a th:href="@{/}" class="logo-container">
+			<span>LUAN</span>
+			<img src="logo.png" alt="Your Logo" class="Logo">
+			<span>MOER</span>
+			</a>
+        </div>
+	
+	<div class="contact-link">
+    		
+		<a class="navbar-brand" th:href="@{/ContactPage}">Kontakt</a> 
+ 	
+ 	</div>
+       
+    </nav>
+
+</div>
+
+    <div th:fragment="footer" class="footer">
+    	
+    	<div class="footerDiv-1">
+    		
+    		<a class="footer-link">Lorem ipsum</a>
+			<a class="footer-link">Lorem ipsum</a>    		
+    		<a class="footer-link">Lorem ipsum</a>
+    		<a class="footer-link">Lorem ipsum</a>
+    		<a class="footer-link">Lorem ipsum</a>
+    		
+    	
+    	</div>
+    	
+    	<div class="footerDiv-2">
+    		
+    		<a class="footer-link">Lorem ipsum</a>
+			<a class="footer-link">Lorem ipsum</a>    		
+    		<a class="footer-link">Lorem ipsum</a>
+    	
+    	</div>
+    	
+    	<div class="footerDiv-3">
+    		
+    		<a class="footer-link">Lorem ipsum</a>
+			<a class="footer-link">Lorem ipsum</a>    		
+    
+    	</div>
+    	
+    	<p class="copyright">Copyright &copy; Luan Moer</p>
+    	
+    </div>
+				
+		<script src="Script.js"></script>
+	
+				
+</body>
+</html>

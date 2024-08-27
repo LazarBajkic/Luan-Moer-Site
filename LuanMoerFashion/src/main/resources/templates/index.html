@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head>
+<link rel="stylesheet" href="MainCss.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta charset="UTF-8">
+<title>Luan Moer</title>
+</head>
+<body>
+
+
+ <th:block th:replace="~{layout::header}"></th:block>
+
+<div class="collection-select">
+ 	
+ 	<div class="Woman-Collection">
+ 		
+ 		<a class="collection-link women-link" th:href="@{/Collection}">
+			<span>Žene</span>
+ 		</a>
+ 		
+ 	</div>
+ 	
+ 	<div class="Men-Collection">
+ 		
+ 		<a class="collection-link men-link" th:href="@{/Collection}">
+			<span class="bottom-link-text">Muškarci</span>
+ 		</a>
+ 		
+ 	</div>
+ 	
+ 	</div>
+
+		<h2 class="contact-us-title">Kontaktirajte nas</h2>
+	
+	<div class="contact-div">
+		
+		<a class="util-button" type="submit" th:href="@{/ContactPageBlock(buttonIdShow='write-option',visibleBlock='faq-items',hideButton='faq',blockIdHide='write-block')}">FAQ</a>
+		
+		<a class="util-button"  type="submit" th:href="@{/ContactPageBlock(buttonIdShow='faq',visibleBlock='write-block',hideButton='write-option',blockIdHide='faq-items')}">Pišite nam</a>
+	
+	</div>
+
+	<th:block th:replace="~{layout::footer}"></th:block>
+	
+	<script src="Script4.js"></script>
+	
+</body>
+</html>

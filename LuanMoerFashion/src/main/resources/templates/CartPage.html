@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="MainCss.css">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Cart</title>
+</head>
+<body>
+	
+	<th:block th:replace="~{layout::header}"></th:block>
+	
+	<div class="cart-section">
+		
+			
+	<div class="cart-title">
+	<h1>Korpa</h1>
+	</div>
+	
+	<div class="cart-wrapper">
+		
+		<div class="cart-content">
+			
+			<div class="product-details">
+			
+			<span class="cart-title-sub">Proizvod</span>
+			<div class="cart-item">
+			
+			<img src="MuskarciSlika2.png">
+			
+			<div class="cart-item-info">
+			
+			<span>Ime</span>
+			<span>L</span>
+			<span>4999 RSD</span>
+			
+			</div>
+			</div>
+			
+		</div>
+		
+		<div class="quantity-wrapper">
+			<span class="cart-title-sub">Kolicina</span>
+			
+				<div class="quantity-div">
+					<div class="quantity-input-div">
+					  <button class="quantity-btn minus">-</button>
+        			  <input type="number" class="quantity-input" value="1" min="1">
+        			  <button class="quantity-btn plus">+</button>
+					</div>
+				<a>Ukloni</a>
+					
+				</div>
+
+				</div>
+			
+				
+			<div class="total-wrapper">
+				<span class="cart-title-sub">Ukupno</span>
+			
+			<div class="total-div">
+				<span>10.000 RSD</span>
+			</div>
+			
+			</div>
+		
+		
+		</div>
+		
+	</div>
+	
+	<div class="confirm-order-div">
+		
+		<span>UKUPNO: 10.000 RSD</span>
+		
+		<button type="button" class="sizeChartBtn" th:onclick="'window.location.href=\'' + @{/Checkout} + '\''">Nastavite</button>
+
+	</div>
+	
+		
+	</div>
+	<th:block th:replace="~{layout::footer}"></th:block>
+
+</body>
+</html>

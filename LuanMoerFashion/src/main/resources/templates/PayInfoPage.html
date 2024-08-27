@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="MainCss.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<th:block th:replace="~{layout::header}"></th:block>
+	
+	<div class="pay-info-wrapper">
+		
+		<div class="pay-info-div">
+			
+			<div class="steps"></div>
+			
+				
+				<form class="info-form" id="info-form" th:action="@{/Checkout}">
+					
+					<h2>Contact</h2>
+					
+					<input type="email"  placeholder="Email" class="credentials">
+					
+					<h2>Shipping address</h2>
+					
+					<select class="country-select"></select>
+					
+					<div class="fullname-checkout">
+        		
+        		<input type="text" placeholder="Ime" class="credentials">
+        		<input type="text" placeholder="Prezime" class="credentials">
+        		
+        	</div>
+        		
+        		<div class="address-apartment">
+        			
+        			<input type="text" placeholder="Address"  class="credentials">
+        		
+        			<input type="text" placeholder="Apartment, suite, etc. (optional)" class="credentials">
+					
+        			
+        		</div>
+					
+					<div class="postalcode-city">
+        		
+        		<input type="text" placeholder="Postal code" class="credentials">
+        		<input type="text" placeholder="City" class="credentials">
+        		
+        	</div>
+					
+					<input type="tel" placeholder="Phone number"class="credentials phone-input">
+					
+					<div class="save-info">
+						
+					<input type="checkbox">
+					<span>Save this information for next time</span>
+											
+					</div>
+				
+					<div class="shipping-info-div" id="shipping-info-div">
+						
+							<div class="shipping-contact">
+							
+						<span>Contact</span>
+						<span>ExampleMail@gmail.com</span>
+						<a>change</a>
+							
+						</div>
+						
+						
+						<div class="shipping-address">
+							
+						<span>Ship to</span>
+						<span>Ulica u Beogradu</span>
+						<a>change</a>
+							
+						</div>
+						
+							<div class="payment-method" id="payment-method">
+							
+						<h2>Payment</h2>
+						<span>All transactions are secured and encrypted</span>
+						
+						<div class="payment-option">
+							
+							<input type="radio" id="selectedOption">
+							<span>Plaćanje pouzećem</span>
+							
+						</div>
+							
+						</div>
+							
+					</div>
+									
+				</form>
+				
+					<div class="action-div">
+					
+					<a> < Return to cart</a>
+					
+					<button type="button" class="continue-shipping sizeChartBtn" id="continuePayment">Continue to shipping</button>
+					
+					</div>
+							
+		</div>
+		
+		<div class="products-in-cart">
+			
+			<div class="product-in-cart">
+				
+				<img src="MuskarciSlika.png">
+				
+				<div class="payout-info cart-item-info">
+					
+						<span>Prsluk svetlo plavi</span>
+						<span>L</span>
+					
+				</div>
+				
+				<div class="cart-total total-div">
+				<span>10.000 RSD</span>
+			</div>
+				
+			</div>
+			
+				<div class="product-in-cart">
+				
+				<img src="MuskarciSlika.png">
+				
+				<div class="payout-info cart-item-info">
+					
+						<span>Prsluk svetlo plavi</span>
+						<span>L</span>
+					
+				</div>
+				
+				<div class="cart-total total-div">
+				<span>10.000 RSD</span>
+			</div>
+				
+			</div>
+			
+			<div class="price-before-shipping">
+				
+				<span>Subtotal</span>
+				<span class="right-side-text">10.000 RSD</span>
+				<span>Shipping</span>
+				<span class="right-side-text">Calculated at next step</span>
+				<span class="bold">Total</span>
+				<span class="right-side-text bold">10.000 RSD</span>
+				
+			</div>
+			
+			<span class="taxes-text">Including 2.120 RSD in taxes</span>
+			
+		</div>
+		
+	</div>
+	
+	    <th:block th:replace="~{layout::footer}"></th:block>
+	
+	
+	<script src="Script3.js"></script>
+	
+</body>
+</html>

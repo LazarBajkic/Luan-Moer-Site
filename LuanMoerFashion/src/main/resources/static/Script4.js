@@ -1,36 +1,39 @@
 function updateNavbarStyles() {
     var navbarLinks = document.querySelectorAll('.NavBar a');
     var iconContainers = document.querySelectorAll('.NavBar .icon-container');
-    var imageContainer = document.querySelector('.collection-select');
-    var imageTop = imageContainer.offsetTop;
-    var imageBottom = imageTop + imageContainer.offsetHeight;
     var navbar = document.querySelector('.NavBar');
-    var scrollY = window.scrollY;
+    var heroImage = document.querySelector('.collection-select');
 
-    if (scrollY > 0) {
-        iconContainers.forEach(function(container) {
-            container.classList.remove('inside-image');
-        });
-        navbar.classList.add('scrolling');
-        navbar.classList.remove('transparent');
-        navbarLinks.forEach(function(link) {
-            link.style.color = 'black'; 
-        });
-    } else {
-        navbar.classList.remove('scrolling');
+    if (heroImage && scrollY === 0) {
         navbar.classList.add('transparent');
+        navbar.classList.remove('scrolling');
         navbarLinks.forEach(function(link) {
-            link.style.color = 'white'; 
+            link.style.color = 'white';
         });
         iconContainers.forEach(function(container) {
             container.classList.add('inside-image');
         });
+    } else if (scrollY > 0) {
+        navbar.classList.remove('transparent');
+        navbar.classList.add('scrolling');
+        navbarLinks.forEach(function(link) {
+            link.style.color = '#153448';
+        });
+        iconContainers.forEach(function(container) {
+            container.classList.remove('inside-image');
+        });
+    } else if (!heroImage) {
+        navbar.classList.remove('transparent');
+        navbar.classList.remove('scrolling');
+        navbarLinks.forEach(function(link) {
+            link.style.color = '#153448';
+        });
+        iconContainers.forEach(function(container) {
+            container.classList.remove('inside-image');
+        });
     }
-    
 }
-
+window.addEventListener('scroll', updateNavbarStyles);
 document.addEventListener('DOMContentLoaded', function() {
     updateNavbarStyles();
 });
-
-window.addEventListener('scroll', updateNavbarStyles);

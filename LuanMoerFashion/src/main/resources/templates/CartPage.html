@@ -20,27 +20,29 @@
 	
 	<div class="cart-wrapper">
 		
-		<div class="cart-content">
+		<div class="cart-content"  th:each="item: ${productsList}">
 			
 			<div class="product-details">
 			
 			<span class="cart-title-sub">Proizvod</span>
 			<div class="cart-item">
 			
-			<img src="MuskarciSlika2.png">
+			<img th:src="${item.imageUrl}">
 			
 			<div class="cart-item-info">
 			
-			<span>Ime</span>
-			<span>L</span>
-			<span>4999 RSD</span>
+			<span class="cart-product-name" th:text="${item.productName}"></span>
+			<span class="cart-product-span" th:text="'Boja: '+${item.productColor}"></span>
+			<span class="cart-product-span" th:text="'Veličina: '+${item.productSize}"></span>
+			<span class="cart-product-span cart-product-price" th:text="${item.productPrice}+',00 RSD'"></span>
 			
 			</div>
+				
 			</div>
-			
+				
 		</div>
 		
-		<div class="quantity-wrapper">
+			<div class="quantity-wrapper">
 			<span class="cart-title-sub">Kolicina</span>
 			
 				<div class="quantity-div">
@@ -49,14 +51,21 @@
         			  <input type="number" class="quantity-input" value="1" min="1">
         			  <button class="quantity-btn plus">+</button>
 					</div>
-				<a>Ukloni</a>
 					
+					<form th:action="@{/RemoveFromCart}" method="post">
+						 <input type="hidden" name="productName" th:value="${item.productName}"> 
+						 <input type="hidden" name="productColor" th:value="${item.productColor}">
+		        <input type="hidden" name="productSize" th:value="${item.productSize}">
+    <button type="submit" class="remove-from-cart">Ukloni</button>
+								
+					</form>
+		
 				</div>
 
 				</div>
-			
 				
-			<div class="total-wrapper">
+		
+		<div class="total-wrapper">
 				<span class="cart-title-sub">Ukupno</span>
 			
 			<div class="total-div">
@@ -64,6 +73,8 @@
 			</div>
 			
 			</div>
+		
+			
 		
 		
 		</div>
@@ -81,6 +92,7 @@
 		
 	</div>
 	<th:block th:replace="~{layout::footer}"></th:block>
+	<th:block th:replace="~{layout::Scripts}"></th:block>
 
 </body>
 </html>

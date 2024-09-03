@@ -12,52 +12,39 @@
 	<th:block th:replace="~{layout::header}"></th:block>
 	
 	<div class="favorites-wrapper">
+			
+		 <div class="favorite-display-div" th:each="item: ${favoritesList}">
 		
 		<div class="favorite-item">
-			
-			<img src="MuskarciSlika2.png">
-			
+				
+		<img th:src="${item.imageUrl}">
+				
+					
 			<div class="favorite-info">
 			
-			<span>Ime</span>
-			<span>L</span>
-			<span>4999 RSD</span>
+			<span class="cart-product-name" th:text="${item.productName}"></span>
+			<span class="cart-product-span" th:text="'Boja: '+${item.productColor}"></span>
+			<span class="cart-product-span"  th:text="'Veličina: '+${item.productSize}"></span>
+			<span class="cart-product-span cart-product-price" th:text="${item.productPrice}+',00 RSD'"></span>
 			
-			</div>
-			
+			<form th:action="@{/AddToCart}" method="post">
+		        <input type="hidden" name="imageUrl" th:value="${item.imageUrl}">
+		        <input type="hidden" name="productName" th:value="${item.productName}">
+		        <input type="hidden" name="productColor" th:value="${item.productColor}">
+		        <input type="hidden" name="productSize" th:value="${item.productSize}">
+		        <input type="hidden" name="productPrice" th:value="${item.productPrice}">
+		        <button type="submit" class="favorites-util-btn util-button">Dodaj u korpu</button>
+		    </form>
+			 
+			</div>	
+		 </div>
 		</div>
 		
-		<div class="favorite-item">
-			
-			<img src="MuskarciSlika2.png">
-			
-			<div class="favorite-info">
-			
-			<span>Ime</span>
-			<span>L</span>
-			<span>4999 RSD</span>
-			
-			</div>
-			
-		</div>
 		
-		<div class="favorite-item">
-			
-			<img src="MuskarciSlika2.png">
-			
-			<div class="favorite-info">
-			
-			<span>Ime</span>
-			<span>L</span>
-			<span>4999 RSD</span>
-			
-			</div>
-			
 		</div>
-		
-	</div>
 	
 	<th:block th:replace="~{layout::footer}"></th:block>
+		<th:block th:replace="~{layout::Scripts}"></th:block>
 	
 </body>
 </html>

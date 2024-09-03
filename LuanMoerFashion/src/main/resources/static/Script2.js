@@ -44,11 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showBlock(buttonId,blockId,buttonIdShow,blockIdHide) {
- 	
- 	document.getElementById(buttonId).style.visibility = 'hidden';
-    document.getElementById(blockIdHide).style.display = 'none';
-    document.getElementById(blockId).style.display = 'block';
+
+    document.getElementById(buttonId).style.visibility = 'hidden';
+    const blockToHide = document.getElementById(blockIdHide);
+    
+    blockToHide.classList.remove('show');
+    
+    setTimeout(() => {
+        blockToHide.style.display = 'none';
+    }, 100);
+    
+    const blockToShow = document.getElementById(blockId);
+    blockToShow.style.display = 'block';
+
+    setTimeout(() => {
+        blockToShow.classList.add('show');
+    }, 10); 
+    
     document.getElementById(buttonIdShow).style.visibility = 'visible';
-	
 }
 

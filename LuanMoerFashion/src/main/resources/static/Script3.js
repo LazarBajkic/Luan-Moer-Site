@@ -10,4 +10,8 @@ document.getElementById('continuePayment').addEventListener('click',function(){
 	if(counter==2){
 		paymentMethod.style.visibility='visible';
 	}
+	if(counter>=3){
+		document.getElementById("overlay").style.display = "block";
+		document.getElementById('success-popup-wrapper').style.visibility='visible';
+	}
 })

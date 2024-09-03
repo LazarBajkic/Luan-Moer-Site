@@ -16,16 +16,16 @@
 		
 		<div class="product-image-main">
 			
-			<img src="MuskarciSlika.png">
+			<img src="Slika1Final.webp">
 			
 		</div>
 		
 		<div class="product-image-sub">
 			
-		<img src="MuskarciSlika2.png">
-        <img src="MuskarciSlika2.png">		
-        <img src="MuskarciSlika2.png">
-	    <img src="MuskarciSlika2.png">
+		<img src="MalaSlika1.webp" alt="Small product picture 1">
+        <img src="MalaSlika2.webp" alt="Small product picture 2">		
+        <img src="MalaSlika3.webp" alt="Small product picture 3">
+	    <img src="MalaSlika4.webp" alt="Small product picture 4">
 		
 		</div>
 		
@@ -38,47 +38,53 @@
 		<div class="title-div">
 			
 			
-			<span class="product-title">Ime proizvoda</span> 
+			<span class="product-title"><b>Dzemper Svetlo Plavi</b></span> 
 			
 		</div>
 				
 			<div class="color-select">
 				
-				<span class="custom-checkbox">Boja:</span>
-			
-				<label class="custom-checkbox">
-					Pesak bež
-        			<input type="radio" name="selection" value="Pesak bež">
-    			</label>
-    
-			    <label class="custom-checkbox">
-			    	Duboka teget
-			        <input type="radio" name="selection" value="Duboka teget">
-			    </label>
-			    
-			    <label class="custom-checkbox">
-			   		Teget
-			        <input type="radio" name="selection" value="Teget"> 
-			    </label>
+				<span class="custom-checkbox"><b>Boja:</b></span>
+			 <label class="custom-checkbox">
+        Pesak bež
+        <input type="radio" name="colorSelection" value="Pesak bež" id="colorBeige">
+    </label>
+
+    <label class="custom-checkbox">
+        Duboka teget
+        <input type="radio" name="colorSelection" value="Duboka teget" id="colorNavy">
+    </label>
+
+    <label class="custom-checkbox">
+        Teget
+        <input type="radio" name="colorSelection" value="Teget" id="colorDarkNavy">
+    </label>
 			
 				
 			</div>
 			
 			<div class="additional-info-wrapper">
 				
-				<span style="margin-bottom:30px">Materijal: 100% premium pamuk</span>
+				<div class="material-info-div">
+					
+					<span><b>Materijal:</b></span>
+				<span>100% premium pamuk</span>
+			
+						
+				</div>
 			
 				<div class="size-price">
 					
-					<span style="font-size:30px;">4.999 RSD</span>
+					<span style="font-size:30px;" id="price">4999,00 RSD</span>
 					
-					<select>
-					<option value="XS">XS</option>
-					<option value="S">S</option>
-					<option value="M">M</option>
-					<option value="L">L</option>
-					<option value="XL">XL</option>
-					<option value="XXL">XXL</option>
+					 <select name="productSize" id="sizeSelect">
+					 <option value="" ></option>
+						<option value="XS" >XS</option>
+						<option value="S" >S</option>
+						<option value="M" >M</option>
+						<option value="L" >L</option>
+						<option value="XL" >XL</option>
+						<option value="XXL" >XXL</option>
 					</select>
 					
 					<button id="sizeChartBtn" class="sizeChartBtn">Vodič veličina</button>
@@ -92,11 +98,23 @@
 		
 		<div class="info-buttons">
 			
-			<button type="submit" class="util-button">Dodaj u korpu</button>
-			
-			
-			
-			<a class="icon-container heart-container" th:href="@{/FavoritesPage}"></a>
+			  <form th:action="@{/AddToCart}" method="post">
+                    <input type="hidden" name="imageUrl" value="Slika1Final.webp">
+                    <input type="hidden" name="productName" value="Dzemper Svetlo Plavi">
+                   	<input type="hidden" name="productColor">
+    				<input type="hidden" name="productSize">
+                    <input type="hidden" name="productPrice" value="4999">
+                    <button type="submit" class="util-button" id="button-check">Dodaj u korpu</button>
+                </form>
+					
+			 <form th:action="@{/AddToFavorites}" class="form-favorites" method="post">
+                <input type="hidden" name="imageUrl" value="Slika1Final.webp">
+                <input type="hidden" name="productName" value="Dzemper Svetlo Plavi">
+                <input type="hidden" name="productColor">
+    			<input type="hidden" name="productSize">
+                <input type="hidden" name="productPrice" value="4999">
+                <button type="submit" class="icon-container heart-container-product" id="button-check-favorites"></button>
+            </form>
 			
 		</div>
 	
@@ -106,7 +124,7 @@
 	
 <div id="sizeChartPopup" class="popup">
     <div class="popup-content">
-        <span class="close-btn">&times;</span>
+        <span class="close-btn" aria-label="Close popup">&times;</span>
         <h2>Size Conversion Chart</h2>
         <table>
             <thead>
@@ -182,9 +200,8 @@
 </div>
 	
 	<th:block th:replace="~{layout::footer}"></th:block>
-	
-	<script src="Script.js"></script>
-	
+	<th:block th:replace="~{layout::Scripts}"></th:block>
+		
 
 </body>
 </html>

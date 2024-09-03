@@ -4,18 +4,36 @@
 <link rel="stylesheet" href="MainCss.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Insert title here</title>
+<title>Payment</title>
 </head>
 <body>
 	
 	<th:block th:replace="~{layout::header}"></th:block>
 	
+	<div class="overlay" id="overlay"></div>
+	
+	
 	<div class="pay-info-wrapper">
 		
+		<div class="success-popup-wrapper" id="success-popup-wrapper">
+				<div class="success-popup">
+					
+						<span class="successful-order-title">Successful order</span>
+						<span class="successful-order-text">Your order has been successfully completed</span>
+						<span class="successful-order-text">Thank you for your trust</span>
+						
+						<a th:href="@{/}"class="homepage-return-link">Return to homepage</a>
+					
+				</div>
+		</div>
+			
 		<div class="pay-info-div">
 			
-			<div class="steps"></div>
-			
+			<div class="steps-div">
+				
+				<h2 style="font-size:4rem;">Luan Moer</h2>
+				
+			</div>
 				
 				<form class="info-form" id="info-form" th:action="@{/Checkout}">
 					
@@ -112,15 +130,14 @@
 				
 				<img src="MuskarciSlika.png">
 				
-				<div class="payout-info cart-item-info">
+				<div class="payout-info cart-item-info ">
 					
-						<span>Prsluk svetlo plavi</span>
-						<span>L</span>
+						<span>Dzemper svetlo plavi</span>
 					
 				</div>
 				
 				<div class="cart-total total-div">
-				<span>10.000 RSD</span>
+				<span>10.000,00 RSD</span>
 			</div>
 				
 			</div>
@@ -131,13 +148,12 @@
 				
 				<div class="payout-info cart-item-info">
 					
-						<span>Prsluk svetlo plavi</span>
-						<span>L</span>
+						<span>Dzemper svetlo plavi</span>
 					
 				</div>
 				
 				<div class="cart-total total-div">
-				<span>10.000 RSD</span>
+				<span>10.000,00 RSD</span>
 			</div>
 				
 			</div>
@@ -145,15 +161,15 @@
 			<div class="price-before-shipping">
 				
 				<span>Subtotal</span>
-				<span class="right-side-text">10.000 RSD</span>
+				<span class="right-side-text">10.000,00 RSD</span>
 				<span>Shipping</span>
 				<span class="right-side-text">Calculated at next step</span>
 				<span class="bold">Total</span>
-				<span class="right-side-text bold">10.000 RSD</span>
+				<span class="right-side-text bold">10.000,00 RSD</span>
 				
 			</div>
 			
-			<span class="taxes-text">Including 2.120 RSD in taxes</span>
+			<span class="taxes-text">Including 2.120,00 RSD in taxes</span>
 			
 		</div>
 		
@@ -161,8 +177,7 @@
 	
 	    <th:block th:replace="~{layout::footer}"></th:block>
 	
-	
-	<script src="Script3.js"></script>
+	<th:block th:replace="~{layout::Scripts}"></th:block>
 	
 </body>
 </html>

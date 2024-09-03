@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="www.thymeleaf.org" >
 <head>
-<link rel="stylesheet" href="MainCss.css">
+<link rel="stylesheet" href="MainCss.css" >
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -9,43 +9,45 @@
 </head>
 <body>
 	
-	<div th:fragment="header">
-	
+	<div th:fragment="header" >
+		
+		<div class="blue-banner">Lorem ipsum dolor sit amet</div>
+		
         <nav class="NavBar">
     
     	<div class="link-container">
     		
-    		<a class="navbar-brand" id="default" th:href="@{/CollectionSelection}">Kolekcija</a>   
+    		<a class="navbar-brand" th:href="@{/CollectionSelection}">Kolekcija</a>   
 			
 			<a class="icon-container cart-container" th:href="@{/CartPage}"></a>
 						
 		
 			<a class="icon-container heart-container" th:href="@{/FavoritesPage}">
-				<div class="favorites-popup">			
+				<div class="favorites-popup">
 	  				<ul class="favorites-minilist">
       					<li>
       						<img src="MuskarciSlika2.png">
       						<div class="minifavorite-info">
-	      						<span>Ime</span>
+	      						<span class="minifave-product-name"><b>Dzemper Svetlo Plavi</b></span>
 								<span>L</span>
-								<span>4999 RSD</span>	
+								<span>4999,00 RSD</span>	
       						</div>
       					
       					</li>
 					    <li>
       						<img src="MuskarciSlika2.png">
       						<div class="minifavorite-info">
-	      						<span>Ime</span>
+	      						<span class="minifave-product-name"><b>Dzemper Svetlo Plavi</b></span>
 								<span>L</span>
-								<span>4999 RSD</span>	
+								<span>4999,00 RSD</span>	
       						</div>
       					</li>
       					<li>
       						<img src="MuskarciSlika2.png">
       						<div class="minifavorite-info">
-	      						<span>Ime</span>
+	      						<span class="minifave-product-name"><b>Dzemper Svetlo Plavi</b></span>
 								<span>L</span>
-								<span>4999 RSD</span>	
+								<span>4999,00 RSD</span>	
       						</div>
       					</li>
       				</ul>
@@ -56,9 +58,9 @@
         
         <div class="logo-container">
 			<a th:href="@{/}" class="logo-container">
-			<span>LUAN</span>
+			<span >LUAN</span>
 			<img src="logo.png" alt="Your Logo" class="Logo">
-			<span>MOER</span>
+			<span >MOER</span>
 			</a>
         </div>
 	
@@ -103,8 +105,13 @@
     	<p class="copyright">Copyright &copy; Luan Moer</p>
     	
     </div>
-				
-		<script src="Script.js"></script>
+		
+	  <th:block th:fragment="Scripts">
+    <script src="Script.js"></script>
+    <script src="Script2.js"></script>
+    <script src="Script3.js"></script>
+    <script src="Script4.js"></script>
+</th:block>
 	
 				
 </body>

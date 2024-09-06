@@ -75,7 +75,7 @@
        
         <div class="write-block" id="write-block" style="display: none;">
         	
-        <form>
+        <form th:action="@{/SendMessage}" method="post">
         		
         	<div class="fullname">
         		
@@ -84,9 +84,9 @@
         		
         	</div>
         	
-        	<input type="email"  placeholder="Email" class="credentials">
+        	<input type="email" name="senderEmail" placeholder="Email" class="credentials">
         	
-        	<textarea rows="4" placeholder="Napišite poruku" class="user-text"></textarea>
+        	<textarea rows="4" name="message" placeholder="Napišite poruku" class="user-text"></textarea>
         	
         	<button type="submit" class="send-button">Pošalji</button>
         	

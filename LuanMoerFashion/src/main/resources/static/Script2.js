@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Missing URL parameters.');
     }
 
+
 });
 
 function showBlock(buttonId,blockId,buttonIdShow,blockIdHide) {

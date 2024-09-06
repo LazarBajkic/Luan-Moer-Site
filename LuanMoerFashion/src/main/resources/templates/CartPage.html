@@ -27,13 +27,13 @@
 			<span class="cart-title-sub">Proizvod</span>
 			<div class="cart-item">
 			
-			<img th:src="${item.imageUrl}">
+			<img class="item-image" th:src="${item.imageUrl}">
 			
 			<div class="cart-item-info">
 			
 			<span class="cart-product-name" th:text="${item.productName}"></span>
-			<span class="cart-product-span" th:text="'Boja: '+${item.productColor}"></span>
-			<span class="cart-product-span" th:text="'Veličina: '+${item.productSize}"></span>
+			<span class="cart-product-span cart-product-color" th:text="'Boja: '+${item.productColor}"></span>
+			<span class="cart-product-span cart-product-size" th:text="'Veličina: '+${item.productSize}"></span>
 			<span class="cart-product-span cart-product-price" th:text="${item.productPrice}+',00 RSD'"></span>
 			
 			</div>
@@ -55,8 +55,8 @@
 					<form th:action="@{/RemoveFromCart}" method="post">
 						 <input type="hidden" name="productName" th:value="${item.productName}"> 
 						 <input type="hidden" name="productColor" th:value="${item.productColor}">
-		        <input type="hidden" name="productSize" th:value="${item.productSize}">
-    <button type="submit" class="remove-from-cart">Ukloni</button>
+		        		<input type="hidden" name="productSize" th:value="${item.productSize}">
+    					<button type="submit" class="remove-from-cart">Ukloni</button>
 								
 					</form>
 		
@@ -69,7 +69,7 @@
 				<span class="cart-title-sub">Ukupno</span>
 			
 			<div class="total-div">
-				<span>10.000 RSD</span>
+				<span class="current-product-total"th:text="${item.productPrice}+',00 RSD'"></span>
 			</div>
 			
 			</div>
@@ -82,10 +82,8 @@
 	</div>
 	
 	<div class="confirm-order-div">
-		
-		<span>UKUPNO: 10.000 RSD</span>
-		
-		<button type="button" class="sizeChartBtn" th:onclick="'window.location.href=\'' + @{/Checkout} + '\''">Nastavite</button>
+				
+		<button type="button" class="proceed-to-payment sizeChartBtn" th:onclick="'window.location.href=\'' + @{/Checkout} + '\''">Nastavite</button>
 
 	</div>
 	

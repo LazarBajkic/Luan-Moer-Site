@@ -4,6 +4,7 @@ const favoritesPopup = document.querySelector('.favorites-popup');
 
 heartContainer.addEventListener('mouseenter', () => {
   favoritesPopup.style.display = 'block';
+
   setTimeout(() => {
     favoritesPopup.style.transform = 'translateY(0)';
     favoritesPopup.style.opacity = '1';
@@ -78,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedColor = document.querySelector('input[name="colorSelection"]:checked')?.value || '';
         const selectedSize = document.querySelector('select[name="productSize"]').value;
 
-        // Update hidden fields in the "AddToCart" form
         const cartForm = document.querySelector('form[action="/AddToCart"]');
         if (cartForm) {
             const colorInputInCart = cartForm.querySelector('input[name="productColor"]');
@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (sizeInputInCart) sizeInputInCart.value = selectedSize;
         }
 
-        // Update hidden fields in the "AddToFavorites" form
         const favoritesForm = document.querySelector('form[action="/AddToFavorites"]');
         if (favoritesForm) {
             const colorInputInFavorites = favoritesForm.querySelector('input[name="productColor"]');

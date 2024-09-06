@@ -37,3 +37,14 @@ window.addEventListener('scroll', updateNavbarStyles);
 document.addEventListener('DOMContentLoaded', function() {
     updateNavbarStyles();
 });
+
+const totalPriceElement = document.querySelector('.right-side-text.bold');
+    if (totalPriceElement) {
+
+        const totalCartPrice = localStorage.getItem('totalCartPrice');
+        if (totalCartPrice) {
+            totalPriceElement.textContent = totalCartPrice + ',00 RSD';
+        } else {
+            totalPriceElement.textContent = '0,00 RSD';
+        }
+    }

@@ -25,30 +25,14 @@
 			<a class="icon-container heart-container" th:href="@{/FavoritesPage}">
 				<div class="favorites-popup">
 	  				<ul class="favorites-minilist">
-      					<li>
-      						<img src="MuskarciSlika2.png">
+      					<li th:each="item :${favoritesList}">
+      						<img th:src="${item.imageUrl}">
       						<div class="minifavorite-info">
-	      						<span class="minifave-product-name"><b>Dzemper Svetlo Plavi</b></span>
-								<span>L</span>
-								<span>4999,00 RSD</span>	
+	      						<span class="minifave-product-name" th:text="${item.productName}"></span>
+								<span th:text="${item.productSize}"></span>
+								<span th:text="${item.productColor}"></span>	
       						</div>
       					
-      					</li>
-					    <li>
-      						<img src="MuskarciSlika2.png">
-      						<div class="minifavorite-info">
-	      						<span class="minifave-product-name"><b>Dzemper Svetlo Plavi</b></span>
-								<span>L</span>
-								<span>4999,00 RSD</span>	
-      						</div>
-      					</li>
-      					<li>
-      						<img src="MuskarciSlika2.png">
-      						<div class="minifavorite-info">
-	      						<span class="minifave-product-name"><b>Dzemper Svetlo Plavi</b></span>
-								<span>L</span>
-								<span>4999,00 RSD</span>	
-      						</div>
       					</li>
       				</ul>
   				</div>

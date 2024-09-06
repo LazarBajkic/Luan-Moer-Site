@@ -197,8 +197,9 @@ body {
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 400px;
-  
+  width: 450px;
+  overflow:auto;
+  max-height:69vh;  
 }
 
 .favorites-minilist{
@@ -209,6 +210,7 @@ body {
 .favorites-minilist li,ul{
 	padding:3px;
 } 
+
 
 li{
 	margin-top:5px;
@@ -221,7 +223,7 @@ li{
 	
 	display:flex;
 	flex-direction: column;
-	width:200px;
+	width:300px;
 	margin-left:30px;
 	font-size:28px;
 	letter-spacing:1px;
@@ -1338,7 +1340,7 @@ form{
 }
 
 .fullname input{
-	width:43.6%;
+	width:44.4%;
 	padding-right: 23px;
 }
 .credentials{
@@ -1616,7 +1618,9 @@ form{
 
 .remove-from-cart{
 		  font-family: "Sometype Mono", system-ui;
-	
+		 border:none;
+		 text-decoration:underline;
+		 font-size:26px;
 }
 
 .quantity-div {

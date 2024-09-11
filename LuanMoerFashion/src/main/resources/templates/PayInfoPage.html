@@ -39,32 +39,30 @@
 					
 					<h2>Contact</h2>
 					
-					<input type="email"  placeholder="Email" class="credentials">
+					<input type="email"  placeholder="Email" class="credentials email-creds">
 					
 					<h2>Shipping address</h2>
-					
-					<select class="country-select"></select>
-					
+										
 					<div class="fullname-checkout">
         		
-        		<input type="text" placeholder="Ime" class="credentials">
-        		<input type="text" placeholder="Prezime" class="credentials">
+        		<input type="text" placeholder="First name" class="credentials name-creds">
+        		<input type="text" placeholder="Last name" class="credentials lName-creds">
         		
         	</div>
         		
         		<div class="address-apartment">
-        			
-        			<input type="text" placeholder="Address"  class="credentials">
+        			<span class="country-notice">Obavestenje: Slanje proizvoda je trenutno moguće samo na teritoriji Republike Srbije</span>
+        			<input type="text" placeholder="Address"  class="credentials address-creds">
         		
-        			<input type="text" placeholder="Apartment, suite, etc. (optional)" class="credentials">
+        			<input type="text" placeholder="Apartment, suite, etc. (optional)" class="credentials flat-creds">
 					
         			
         		</div>
 					
 					<div class="postalcode-city">
         		
-        		<input type="text" placeholder="Postal code" class="credentials">
-        		<input type="text" placeholder="City" class="credentials">
+        		<input type="text" placeholder="Postal code" class="credentials pCode-creds">
+        		<input type="text" placeholder="City" class="credentials city-creds">
         		
         	</div>
 					
@@ -72,7 +70,7 @@
 					
 					<div class="save-info">
 						
-					<input type="checkbox">
+					<input type="checkbox" class="saveInfo">
 					<span>Save this information for next time</span>
 											
 					</div>
@@ -82,17 +80,20 @@
 							<div class="shipping-contact">
 							
 						<span>Contact</span>
-						<span>ExampleMail@gmail.com</span>
-						<a>change</a>
-							
+						<input class="shipping-contact-email" type="email" disabled="disabled">
+						<button class="change-button">Change</button>	
+						<button class="save-button" style="display:none;">Save</button>
+												
+						
 						</div>
 						
 						
 						<div class="shipping-address">
 							
 						<span>Ship to</span>
-						<span>Ulica u Beogradu</span>
-						<a>change</a>
+						<input class="shipping-contact-address" type="text"  disabled="disabled">
+						<button class="change-button">Change</button>
+						<button class="save-button" style="display:none;">Save</button>
 							
 						</div>
 						

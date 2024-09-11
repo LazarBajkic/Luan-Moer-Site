@@ -24,16 +24,8 @@
 		
 			<a class="icon-container heart-container" th:href="@{/FavoritesPage}">
 				<div class="favorites-popup">
-	  				<ul class="favorites-minilist">
-      					<li th:each="item :${favoritesList}">
-      						<img th:src="${item.imageUrl}">
-      						<div class="minifavorite-info">
-	      						<span class="minifave-product-name" th:text="${item.productName}"></span>
-								<span th:text="${item.productSize}"></span>
-								<span th:text="${item.productColor}"></span>	
-      						</div>
+	  				<ul class="favorites-minilist" id="favoritesList">
       					
-      					</li>
       				</ul>
   				</div>
 			</a>

@@ -1,41 +1,50 @@
-
-const heartContainer = document.querySelector('.heart-container');
-const favoritesPopup = document.querySelector('.favorites-popup');
-
-heartContainer.addEventListener('mouseenter', () => {
-  favoritesPopup.style.display = 'block';
-
-  setTimeout(() => {
-    favoritesPopup.style.transform = 'translateY(0)';
-    favoritesPopup.style.opacity = '1';
-  }, 10);
-});
-
-heartContainer.addEventListener('mouseleave', () => {
-  favoritesPopup.style.transform = 'translateY(-10px)';
-  favoritesPopup.style.opacity = '0';
-  setTimeout(() => {
-    favoritesPopup.style.display = 'none';
-  }, 300);
-});
-
-const popup = document.getElementById("sizeChartPopup");
-const btn = document.getElementById("sizeChartBtn");
-const closeBtn = document.querySelector(".close-btn");
-
-btn.onclick = function() {
-    popup.style.display = "block";
-    popup.style.transform = "translateX(0)";
-}
-
-closeBtn.onclick = function() {
-    popup.style.transform = "translateX(100%)";
-    setTimeout(function() {
-        popup.style.display = "none";
-    }, 300);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
+	
+          fetchFavoritesList();
+
+        function fetchFavoritesList() {
+            fetch('/getFavoritesList')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched Favorites List:', data); // Debugging line
+                    if (Array.isArray(data)) { // Check if data is an array
+                        updateFavoritesList(data);
+                    } else {
+                        console.error('Expected an array but received:', data);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching favorites:', error);
+                });
+        }
+
+        function updateFavoritesList(favoritesList) {
+            const favoritesListElement = document.getElementById('favoritesList');
+            if (!favoritesListElement) {
+                console.error('Favorites list element not found');
+                return;
+            }
+
+
+            favoritesList.forEach(product => {
+
+                const listItem = document.createElement('li');
+                listItem.dataset.productId = product.productName; 
+                listItem.innerHTML = `
+                    <img src="${product.imageUrl}" alt="${product.productName}">
+                    <div class="minifavorite-info">
+                        <span class="minifave-product-name">${product.productName}</span>
+                        <span>${product.productSize}</span>
+                        <span>${product.productColor}</span>
+                    </div>
+                `;
+                
+                console.log('Appending item:', listItem);
+
+                favoritesListElement.appendChild(listItem);
+            });
+        }
+
 
     function resetBorders() {
         const selectedColorElemContainer = document.querySelector('.color-select'); 
@@ -121,4 +130,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     resetBorders();
+})
+
+const heartContainer = document.querySelector('.heart-container');
+const favoritesPopup = document.querySelector('.favorites-popup');
+
+heartContainer.addEventListener('mouseenter', () => {
+  favoritesPopup.style.display = 'block';
+
+  setTimeout(() => {
+    favoritesPopup.style.transform = 'translateY(0)';
+    favoritesPopup.style.opacity = '1';
+  }, 10);
 });
+
+heartContainer.addEventListener('mouseleave', () => {
+  favoritesPopup.style.transform = 'translateY(-10px)';
+  favoritesPopup.style.opacity = '0';
+  setTimeout(() => {
+    favoritesPopup.style.display = 'none';
+  }, 300);
+});
+
+const popup = document.getElementById("sizeChartPopup");
+const btn = document.getElementById("sizeChartBtn");
+const closeBtn = document.querySelector(".close-btn");
+
+btn.onclick = function() {
+    popup.style.display = "block";
+    popup.style.transform = "translateX(0)";
+}
+
+closeBtn.onclick = function() {
+    popup.style.transform = "translateX(100%)";
+    setTimeout(function() {
+        popup.style.display = "none";
+    }, 300);
+}

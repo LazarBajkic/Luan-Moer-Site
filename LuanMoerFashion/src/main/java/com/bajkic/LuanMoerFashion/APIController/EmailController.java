@@ -19,9 +19,9 @@ public class EmailController{
 		
 	}
 	
-	public void sendQuestion(String sender,String message) throws IOException {
-		Email from = new Email(sender);
-	    String subject = "Sending with SendGrid is Fun";
+	public void sendInfo(String emailSubj,String message) throws IOException {
+		Email from = new Email("bajkiclazar@gmail.com");
+	    String subject = emailSubj;
 	    Email to = new Email("comradejaroslav@gmail.com");
 	    Content content = new Content("text/plain", message);
 	    Mail mail = new Mail(from, subject, to, content);

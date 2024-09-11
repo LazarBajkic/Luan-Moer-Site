@@ -2,11 +2,26 @@ package com.bajkic.LuanMoerFashion.Model;
 
 public class CartItem {
 	
+	private String imageUrl;
 	private String productName;
 	private String productSize;
 	private String productColor;
 	private int quantity;
 	private int price;
+	
+	public CartItem() {
+		
+	}
+	
+	public CartItem(String imageUrl,String productName, String productSize, String productColor, int quantity, int price) {
+		super();
+		this.imageUrl=imageUrl;
+		this.productName = productName;
+		this.productSize = productSize;
+		this.productColor = productColor;
+		this.quantity = quantity;
+		this.price = price;
+	}
 	
 	public CartItem(String productName, String productSize, String productColor, int quantity, int price) {
 		super();
@@ -16,6 +31,16 @@ public class CartItem {
 		this.quantity = quantity;
 		this.price = price;
 	}
+
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -48,8 +73,8 @@ public class CartItem {
 	}
 	@Override
 	public String toString() {
-		return "CartItem [productName=" + productName + ", productSize=" + productSize + ", productColor="
-				+ productColor + ", quantity=" + quantity + ", price=" + price + "]";
+		return "\nProduct name=" + productName + "\n Product size=" + productSize + "\n Product color="
+				+ productColor + "\n Quantity=" + quantity + "\n Price=" + price;
 	}
 	
 	

@@ -104,14 +104,28 @@ body {
 	color:#153448;
 }
 
-.heart-container,.heart-container-product{
+.heart-container{
 	background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
     background-image: url('heart.png');
     width: 36px;
     height: 36px;
+    transition: background 0.3s ease;      
+}
+
+.heart-container-product{
+	background-repeat: no-repeat;
+    background-position: center center;
+        background-size: contain;
+    
+    background-image: url('heart.png');
+    width: 36px;
+    background-color:transparent;
+    height: 36px;
+    cursor:pointer;
     transition: background 0.3s ease;  
+    border:none;
 }
 
 .icon-container{
@@ -134,7 +148,10 @@ body {
 }
 
 .NavBar .heart-container:not(.inside-image):hover,.heart-container-product:hover {
-    background:url('heart(1).png') no-repeat center center;
+    background:url('heart(1).png') ;
+	background-repeat: no-repeat;
+    background-position: center center;
+        background-size: contain;
 }
 
 .NavBar .heart-container.inside-image:hover {
@@ -391,14 +408,6 @@ li{
     margin-top: 2.5rem;
 }
 
-.product-container {
-    margin: 0.625rem;
-    padding: 2.5rem 6.25rem 6.25rem 6.25rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
-}
 
 @media (max-width: 1200px) {
     .NavBar {
@@ -622,8 +631,7 @@ li{
     padding: 2.5rem 6.25rem 6.25rem 6.25rem;
     display: grid;
     grid-template-columns: repeat(3, 0.1fr);
-    justify-content: center;
-    align-items: center;
+   
     gap:10px;
 }
 
@@ -657,7 +665,7 @@ li{
 .moer-tag{
 	  margin-top: 10px;
     margin-bottom: 15px;
-	font-size:16px;
+	font-size:18px;
 	    font-family: "Sometype Mono", system-ui;
 	
 }
@@ -727,6 +735,8 @@ li{
     .product-container {
         padding: 2rem 3rem;
         grid-template-columns: repeat(2, 1fr);
+          justify-items: center;
+    align-items: center;
     }
 
     .product-name {
@@ -1770,7 +1780,10 @@ input[type="number"] {
 	font-size:30px;
 }
 
-
+.country-notice{
+	font-size:12px;
+	color:red;
+}
 
 .postalcode-city input,
 .fullname-checkout input{
@@ -1881,11 +1894,11 @@ input[type="checkbox"]:checked {
 	height:20vh;
 }
 
-.shipping-contact,
-.shipping-address{
+.shipping-contact ,
+.shipping-address {
 	display:flex;
 	justify-content: space-between;
-	font-size:30px;
+	font-size:28px;
 	padding:3%;
 	letter-spacing:1px;
 }
@@ -1894,9 +1907,26 @@ input[type="checkbox"]:checked {
 	border-top: 1px solid #153448;;
 }
 
-.shipping-contact a,
-.shipping-address a{
+.shipping-contact .change-button,
+.shipping-address .change-button{
 text-decoration:underline;
+background:transparent;
+		font-size:28px;
+		border:none;
+		font-family: "Playfair Display",serif;
+}
+
+.shipping-contact input,
+.shipping-address input{
+	background:transparent;
+		font-size:28px;
+		border:none;
+		font-family: "Playfair Display",serif;
+		width:70%;
+		text-align:center;	
+		 white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .payment-method{

@@ -20,7 +20,7 @@
 	
 	<div class="cart-wrapper">
 		
-		<div class="cart-content"  th:each="item: ${productsList}">
+		<div class="cart-content"  th:each="item: ${cartItems}">
 			
 			<div class="product-details">
 			
@@ -34,7 +34,7 @@
 			<span class="cart-product-name" th:text="${item.productName}"></span>
 			<span class="cart-product-span cart-product-color" th:text="'Boja: '+${item.productColor}"></span>
 			<span class="cart-product-span cart-product-size" th:text="'Veličina: '+${item.productSize}"></span>
-			<span class="cart-product-span cart-product-price" th:text="${item.productPrice}+',00 RSD'"></span>
+			<span class="cart-product-span cart-product-price" th:text="${item.price}+',00 RSD'"></span>
 			
 			</div>
 				
@@ -69,7 +69,7 @@
 				<span class="cart-title-sub">Ukupno</span>
 			
 			<div class="total-div">
-				<span class="current-product-total"th:text="${item.productPrice}+',00 RSD'"></span>
+				<span class="current-product-total"th:text="${item.price}+',00 RSD'"></span>
 			</div>
 			
 			</div>

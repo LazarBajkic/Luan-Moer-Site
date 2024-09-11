@@ -20,53 +20,36 @@
 	
 	<div class="product-container">
 		
-		<div class="product">
+		<div class="product" th:if="${gender == 'men'}">
 		
-		<a class="image-link" href="@{/ProductInfo}">
+		<a class="image-link" th:href="@{/ProductInfo(name='Dzemper-Svetlo-Plavi')}">
 			<img src="Slika1Final.webp" alt="Blue suede patch sweater">
 		</a>
 			
 			<div class="product-info">
-			<a class="product-name" th:href="@{/ProductInfo}">Dzemper Svetlo Plavi</a>
+			<a class="product-name" th:href="@{/ProductInfo(name='Dzemper-Svetlo-Plavi')}">Dzemper Svetlo Plavi</a>
 			<span class="moer-tag">Luan Moer</span>
 			<span class="price">4.999,00 RSD</span>
 			</div>
 			
-			
+		
 		</div>
 		
-		<div class="product">
+		<div class="product" th:if="${gender == 'women'}">
 		
-		<a class="image-link" href="#">
-						<img src="Slika1Final.webp" alt="Blue suede patch sweater">
-
+		<a class="image-link" th:href="@{/ProductInfo(name='Rolka-Tamno-Crvena')}">
+			<img src="Slika1Final.webp" alt="Dark Red Turtleneck">
 		</a>
 			
 			<div class="product-info">
-			<a class="product-name" href="#">Dzemper Svetlo Plavi</a>
+			<a class="product-name" th:href="@{/ProductInfo(name='Rolka-Tamno-Crvena')}">Rolka Tamno Crvena</a>
 			<span class="moer-tag">Luan Moer</span>
 			<span class="price">4.999,00 RSD</span>
 			</div>
 			
 			
 		</div>
-		
-			<div class="product">
-		
-		<a class="image-link" href="#">
-			<img src="Slika1Final.webp" alt="Blue suede patch sweater">
-		</a>
-			
-			<div class="product-info">
-			<a class="product-name" href="#">Dzemper Svetlo Plavi</a>
-			<span class="moer-tag">Luan Moer</span>
-			<span class="price">4.999,00 RSD</span>
-			</div>
-			
-			
-		</div>
-		
-		
+	
 	</div>
 	
 	<th:block th:replace="~{layout::footer}"></th:block>

@@ -6,10 +6,20 @@ public class Product {
 	private String productName;
 	private String productColor;
 	private String productSize;
+	private int quantity;
 	private int productPrice;
 	
 	public Product() {
 		
+	}
+	
+	public Product(String imageUrl,String productName,String productColor,String productSize,int quantity,int productPrice) {
+		this.imageUrl=imageUrl;
+		this.productName=productName;
+		this.productColor=productColor;
+		this.productSize=productSize;
+		this.quantity=quantity;
+		this.productPrice=productPrice;
 	}
 	
 	public Product(String imageUrl,String productName,String productColor,String productSize,int productPrice) {
@@ -63,8 +73,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [imageUrl=" + imageUrl + ", productName=" + productName + ", productColor=" + productColor
-				+ ", productSize=" + productSize + ", productPrice=" + productPrice + "]";
+				+ ", productSize=" + productSize + ", quantity=" + quantity + ", productPrice=" + productPrice + "]";
 	}
+
 	
 	
 }

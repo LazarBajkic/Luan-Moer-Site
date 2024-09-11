@@ -9,196 +9,39 @@
 
 	<th:block th:replace="~{layout::header}"></th:block>
 
-	
-	<div class="product-wrapper">
-	
-	<div class="product-images">
-		
-		<div class="product-image-main">
-			
-			<img src="Slika1Final.webp">
-			
-		</div>
-		
-		<div class="product-image-sub">
-			
-		<img src="MalaSlika1.webp" alt="Small product picture 1">
-        <img src="MalaSlika2.webp" alt="Small product picture 2">		
-        <img src="MalaSlika3.webp" alt="Small product picture 3">
-	    <img src="MalaSlika4.webp" alt="Small product picture 4">
-		
-		</div>
-		
-	</div>
-
-	<div class="product-info-wrapper">
-	
-		<div class="info-text">
-			
-		<div class="title-div">
-			
-			
-			<span class="product-title"><b>Dzemper Svetlo Plavi</b></span> 
-			
-		</div>
-				
-			<div class="color-select">
-				
-				<span class="custom-checkbox"><b>Boja:</b></span>
-			 <label class="custom-checkbox">
-        Pesak bež
-        <input type="radio" name="colorSelection" value="Pesak bež" id="colorBeige">
-    </label>
-
-    <label class="custom-checkbox">
-        Duboka teget
-        <input type="radio" name="colorSelection" value="Duboka teget" id="colorNavy">
-    </label>
-
-    <label class="custom-checkbox">
-        Teget
-        <input type="radio" name="colorSelection" value="Teget" id="colorDarkNavy">
-    </label>
-			
-				
-			</div>
-			
-			<div class="additional-info-wrapper">
-				
-				<div class="material-info-div">
-					
-					<span><b>Materijal:</b></span>
-				<span>100% premium pamuk</span>
-			
-						
-				</div>
-			
-				<div class="size-price">
-					
-					<span style="font-size:30px;" id="price">4999,00 RSD</span>
-					
-					 <select name="productSize" id="sizeSelect">
-					 <option value="" ></option>
-						<option value="XS" >XS</option>
-						<option value="S" >S</option>
-						<option value="M" >M</option>
-						<option value="L" >L</option>
-						<option value="XL" >XL</option>
-						<option value="XXL" >XXL</option>
-					</select>
-					
-					<button id="sizeChartBtn" class="sizeChartBtn">Vodič veličina</button>
-					
-				</div>
-			
-			</div>
-			
-			
-		</div>
-		
-		<div class="info-buttons">
-			
-			  <form th:action="@{/AddToCart}" method="post">
-                    <input type="hidden" name="imageUrl" value="Slika1Final.webp">
-                    <input type="hidden" name="productName" value="Dzemper Svetlo Plavi">
-                   	<input type="hidden" name="productColor">
-    				<input type="hidden" name="productSize">
-                    <input type="hidden" name="productPrice" value="4999">
-                    <button type="submit" class="util-button" id="button-check">Dodaj u korpu</button>
-                </form>
-					
-			 <form th:action="@{/AddToFavorites}" class="form-favorites" method="post">
-                <input type="hidden" name="imageUrl" value="Slika1Final.webp">
-                <input type="hidden" name="productName" value="Dzemper Svetlo Plavi">
-                <input type="hidden" name="productColor">
-    			<input type="hidden" name="productSize">
-                <input type="hidden" name="productPrice" value="4999">
-                <button type="submit" class="icon-container heart-container-product" id="button-check-favorites"></button>
-            </form>
-			
-		</div>
-	
-	</div>
-	
-	</div>
-	
-<div id="sizeChartPopup" class="popup">
-    <div class="popup-content">
-        <span class="close-btn" aria-label="Close popup">&times;</span>
-        <h2>Size Conversion Chart</h2>
-        <table>
-            <thead>
-                <tr>
-                	<th></th>
-                    <th>XS</th>
-                    <th>S</th>
-                    <th>M</th>
-                    <th>L</th>
-                    <th>XL</th>
-                    <th>XXL</th>
-                </tr>
-            </thead>
-            <tbody>
-             <tr>
-                <th>Deo 1</th>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>36</td>
-                     <td>48</td>
-                    <td>64</td>
-                     <td>64</td>
-                </tr>
-                <tr>
-                <th>Deo 2</th>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>36</td>
-                     <td>48</td>
-                    <td>64</td>
-                     <td>64</td>
-                </tr>
-                <tr>
-                <th>Deo 3</th>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>36</td>
-                     <td>48</td>
-                    <td>64</td>
-                     <td>64</td>
-                </tr>
-          		 <tr>
-                <th>Deo 4</th>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>36</td>
-                     <td>48</td>
-                    <td>64</td>
-                     <td>64</td>
-                </tr>
-                 <tr>
-                <th>Deo 5</th>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>36</td>
-                    <td>48</td>
-                    <td>64</td>
-                     <td>64</td>
-                </tr>
-                  <tr>
-                <th>Deo 6</th>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>36</td>
-                    <td>48</td>
-                    <td>64</td>
-                     <td>64</td>
-                </tr>
-               
-            </tbody>
-        </table>
-    </div>
+<div th:if="${name=='Dzemper-Svetlo-Plavi'}">
+	<th:block th:replace="~{ProductFragment :: product(
+        mainImageUrl='Slika1Final.webp',
+        smallImageUrl1='MalaSlika1.webp',
+        smallImageUrl2='MalaSlika2.webp',
+        smallImageUrl3='MalaSlika3.webp',
+        smallImageUrl4='MalaSlika4.webp',
+        productName='Dzemper Svetlo Plavi',
+        materialInfo='100% premium pamuk',
+        price='4999',
+        sizeSelectId='sizeSelect',
+        sizeChartBtnId='sizeChartBtn'
+    )}"></th:block>
+    
 </div>
-	
+    	
+    <div  th:if="${name =='Rolka-Tamno-Crvena'}" >
+		<th:block th:replace="~{ProductFragment :: product(
+        mainImageUrl='Slika1Final.webp',
+        smallImageUrl1='MalaSlika1.webp',
+        smallImageUrl2='MalaSlika2.webp',
+        smallImageUrl3='MalaSlika3.webp',
+        smallImageUrl4='MalaSlika4.webp',
+        productName='Rolka Tamno Crvena',
+        materialInfo='100% premium vuna',
+        price='5999',
+        sizeSelectId='sizeSelect',
+        sizeChartBtnId='sizeChartBtn'
+    )}"></th:block>
+        
+    </div>
+
+    
 	<th:block th:replace="~{layout::footer}"></th:block>
 	<th:block th:replace="~{layout::Scripts}"></th:block>
 		

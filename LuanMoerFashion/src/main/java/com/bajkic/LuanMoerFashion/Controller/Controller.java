@@ -2,8 +2,10 @@ package com.bajkic.LuanMoerFashion.Controller;
 
 import java.io.IOException;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bajkic.LuanMoerFashion.APIController.EmailController;
 import com.bajkic.LuanMoerFashion.Model.CartItem;
+import com.bajkic.LuanMoerFashion.Model.Customer;
 import com.bajkic.LuanMoerFashion.Model.Product;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
+
 
 
 
@@ -38,14 +41,22 @@ public class Controller {
 	@Autowired
 	private EmailController eCon;
 	
-	  @ModelAttribute("favoritesList")
-	    public List<Product> initializeFavorites() {
-	        return new ArrayList<>();  
+	  
+	  @ModelAttribute("cartItems")
+	    public List<CartItem> initializeCart(HttpSession session) {
+	        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+	        if (cartItems == null) {
+	            cartItems = new ArrayList<>();
+	            session.setAttribute("cartItems", cartItems);
+	        }
+	        return cartItems;
 	    }
-	  	
+	  
 	@GetMapping("/Collection")
-	public String getCollection() {
-		return "CollectionPage";
+	public ModelAndView getCollection(@RequestParam("gender") String gender) {
+		ModelAndView mav = new ModelAndView("CollectionPage");
+		mav.addObject("gender", gender);
+		return mav;
 	}
 	
 	@GetMapping("/CollectionSelection")
@@ -54,8 +65,11 @@ public class Controller {
 	}
 	
 	@GetMapping("/ProductInfo")
-	public String getProduct() {
-		return "ProductPage";
+	public ModelAndView getProduct(@RequestParam("name") String name,HttpSession session) {
+		ModelAndView mav = new ModelAndView("ProductPage");
+		session.setAttribute("name", name);
+		mav.addObject("name", name);
+		return mav;
 	}
 	
 	@GetMapping("/ContactPage")
@@ -76,8 +90,9 @@ public class Controller {
 	}
 	
 	@GetMapping("/FavoritesPage")
-	public ModelAndView getFavoritesPage() {
+	public ModelAndView getFavoritesPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView("FavoritesPage");
+		favoritesList = (List<Product>) session.getAttribute("favoritesList");
 		mav.addObject("favoritesList",favoritesList);
 		return mav;
 	}
@@ -91,12 +106,14 @@ public class Controller {
 	
 	@PostMapping("/RemoveFromCart")
 	public ModelAndView removeFromCart(@RequestParam("productName") String productName,@RequestParam("productColor") String productColor,
-			@RequestParam("productSize")String productSize) {
+			@RequestParam("productSize")String productSize,HttpSession session) {
+		
+		List<CartItem> list = (List<CartItem>) session.getAttribute("cartItems");
 		
 		ModelAndView mav = new ModelAndView("CartPage");
 		synchronized(productsList) {
-			 for (Iterator<Product> iterator = productsList.iterator(); iterator.hasNext();) {
-			        Product p = iterator.next();
+			 for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
+			        CartItem p = iterator.next();
 			        if (p.getProductName().equals(productName) &&
 			            p.getProductColor().equals(productColor) &&
 			            p.getProductSize().equals(productSize)) {
@@ -130,13 +147,27 @@ public class Controller {
 	            .mapToInt(item -> item.getPrice() * item.getQuantity())
 	            .sum();
 	    
+	    session.setAttribute("totalPrice", totalPrice);
+	    
 	}
 	
 	@PostMapping("/SendMessage")
-	public String sendMessage(@RequestParam("senderEmail") String senderEmail,@RequestParam("message")String message) throws IOException {
-		eCon.sendQuestion(senderEmail, message);
+	public String sendMessage(@RequestParam("senderEmail") String senderEmail,@RequestParam("senderEmail") String email,@RequestParam("message")String message) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		sb.append(email);
+		sb.append("\n");
+		sb.append(message);
+		eCon.sendInfo("Pitanje",sb.toString());
 		System.out.println("success");
 		return "ContactPage";
+	}
+	
+	@PostMapping("/submitUserInfo")
+	@ResponseBody
+	public void handleUserInfo(@RequestBody Customer customerInfo,HttpSession session) {
+		session.setAttribute("customerInfo", customerInfo);
+		System.out.println(session.getAttribute("totalPrice"));
+		System.out.println(session.getAttribute("customerInfo").toString());
 	}
 	
    
@@ -148,41 +179,83 @@ public class Controller {
     }
 	 
 	@PostMapping("/AddToCart")
-	public String addToCart(@RequestParam("imageUrl")String imageUrl,
+	public ModelAndView addToCart(@RequestParam("imageUrl")String imageUrl,
 							@RequestParam("productName") String productName,
 							@RequestParam("productColor") String productColor,
 							@RequestParam("productSize")String productSize,
-							@RequestParam("productPrice") int productPrice) {
-		
+							@RequestParam("productPrice") int productPrice, @ModelAttribute("cartItems") List<CartItem> cartItems,HttpSession session) {
+		ModelAndView mav = new ModelAndView("ProductPage");
+		String name = (String) session.getAttribute("name");
+		mav.addObject("name", name);
 		if(productColor.equals("")||productSize.equals("")) {
 			System.out.println("error");
 		}else {
 			
-			Product p = new Product(imageUrl,productName,productColor,productSize,productPrice);
+			
+			CartItem p = new CartItem(imageUrl,productName,productColor,productSize,1,productPrice);
 			System.out.println(p.toString());
-			productsList.add(p);
-		}
-		return "ProductPage";
-	}
-	
-	@PostMapping("/AddToFavorites")
-	public String addToFavorites(@RequestParam("imageUrl")String imageUrl,
-								@RequestParam("productName") String productName,
-								@RequestParam("productColor") String productColor,
-								@RequestParam("productSize")String productSize,
-								@RequestParam("productPrice") int productPrice) {
-		  if (favoritesList == null) {
-	            favoritesList = new ArrayList<>();
-	        }
-		if(productColor.equals("")||productSize.equals("")) {
-			System.out.println("error");
-		}else {
-			Product p = new Product(imageUrl,productName,productColor,productSize,productPrice);
-			System.out.println(p.toString());
-			favoritesList.add(p);
+			cartItems.add(p);
+			
 		}
 		
-		return "ProductPage";
+		return mav;
 	}
 	
+	@PostMapping("/sendOrder")
+	@ResponseBody
+	public void sendOrder(HttpSession session) throws IOException {
+		Customer customer = (Customer) session.getAttribute("customerInfo");
+		List<CartItem> cartItemsSend = (List<CartItem>) session.getAttribute("cartItems");
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(customer.toString());
+		for (CartItem item : cartItemsSend) {
+		    sb.append(item.toString()); 
+		}
+		
+		String orderBody = sb.toString();
+		
+		eCon.sendInfo("Porudzbina",orderBody);
+		System.out.println("Zvali me");
+	}
+	
+	
+	@PostMapping("/AddToFavorites")
+	public ModelAndView addToFavorites(@RequestParam("imageUrl") String imageUrl,
+	                              @RequestParam("productName") String productName,
+	                              @RequestParam("productColor") String productColor,
+	                              @RequestParam("productSize") String productSize,
+	                              @RequestParam("productPrice") int productPrice,
+	                              HttpSession session) {
+
+	    List<Product> favoritesList = (List<Product>) session.getAttribute("favoritesList");
+	    
+	    if(favoritesList == null) {
+	    	favoritesList = Collections.synchronizedList(new ArrayList<>());
+	    }
+	    
+	    ModelAndView mav = new ModelAndView("ProductPage");
+	    String name = (String) session.getAttribute("name");
+	    mav.addObject("name", name);
+	    
+	    if (productColor.isEmpty() || productSize.isEmpty()) {
+	        System.out.println("error");
+	    } else {
+	        Product p = new Product(imageUrl, productName, productColor, productSize, productPrice);
+	        favoritesList.add(p);
+	        session.setAttribute("favoritesList", favoritesList);
+	    }
+
+	    return mav;
+	}
+	
+	@GetMapping("/getFavoritesList")
+	@ResponseBody
+	public List<Product> getFavoritesList(HttpSession session) {
+	    List<Product> favoritesList = (List<Product>) session.getAttribute("favoritesList");
+	    if (favoritesList == null) {
+	        favoritesList = new ArrayList<>();
+	    }
+	    return favoritesList;
+	}
 }

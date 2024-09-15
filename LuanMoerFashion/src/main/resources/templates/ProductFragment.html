@@ -6,11 +6,11 @@
     <title>Product Fragment</title>
 </head>
 <body>
-    <div th:fragment="product(mainImageUrl, smallImageUrl1, smallImageUrl2, smallImageUrl3, smallImageUrl4, productName, materialInfo, price, sizeSelectId, sizeChartBtnId)">
+    <div class="outer-product-div" th:fragment="product(mainImageUrl, smallImageUrl1, smallImageUrl2, smallImageUrl3, smallImageUrl4, productName, materialInfo, price, sizeSelectId, sizeChartBtnId)">
         <div class="product-wrapper">
             <div class="product-images">
                 <div class="product-image-main">
-                    <img th:src="@{${mainImageUrl}}" alt="Main product image">
+                    <img th:src="@{${mainImageUrl}}" class="image-big" alt="Main product image">
                 </div>
                 <div class="product-image-sub">
                     <img th:src="@{${smallImageUrl1}}" alt="Small product picture 1">
@@ -48,7 +48,7 @@
                             <span th:text="${materialInfo}"></span>
                         </div>
                         <div class="size-price">
-                            <span style="font-size:30px;" th:text="${price} + ' RSD'"></span>
+                            <span th:text="${price} + ' RSD'"></span>
                             <select name="productSize" th:id="${sizeSelectId}">
                                 <option value=""></option>
                                 <option value="XS">XS</option>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="info-buttons">
-                    <form th:action="@{/AddToCart}" method="post">
+                    <form th:action="@{/AddToCart}" method="post" style="width:90%; align-items:center;">
                         <input type="hidden" name="imageUrl" th:value="${mainImageUrl}">
                         <input type="hidden" name="productName" th:value="${productName}">
                         <input type="hidden" name="productColor">

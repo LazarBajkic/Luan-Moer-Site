@@ -2,22 +2,43 @@ document.addEventListener('DOMContentLoaded', function() {
 	
           fetchFavoritesList();
 
-        function fetchFavoritesList() {
-            fetch('/getFavoritesList')
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Fetched Favorites List:', data); // Debugging line
-                    if (Array.isArray(data)) { // Check if data is an array
-                        updateFavoritesList(data);
-                    } else {
-                        console.error('Expected an array but received:', data);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error fetching favorites:', error);
-                });
-        }
+       function fetchFavoritesList() {
+    fetch('/getFavoritesList')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fetched Favorites List:', data);
 
+            const favoritesListElement = document.getElementById('favoritesList');
+            const emptyMessageElement = document.getElementById('emptyFavoritesMessage');
+
+            if (!favoritesListElement) {
+                console.error('Favorites list element not found');
+                return;
+            }
+
+            if (Array.isArray(data)) {
+                if (data.length === 0) {
+
+                    if (emptyMessageElement) {
+                        emptyMessageElement.style.display = 'block';
+                    }
+                    favoritesListElement.style.display = 'none';
+                } else {
+
+                    if (emptyMessageElement) {
+                        emptyMessageElement.style.display = 'none';
+                    }
+                    favoritesListElement.style.display = 'block';
+                    updateFavoritesList(data); 
+                }
+            } else {
+                console.error('Expected an array but received:', data);
+            }
+        })
+        .catch((error) => {
+            console.error('Error fetching favorites:', error);
+        });
+}
         function updateFavoritesList(favoritesList) {
             const favoritesListElement = document.getElementById('favoritesList');
             if (!favoritesListElement) {

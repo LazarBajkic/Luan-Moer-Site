@@ -25,6 +25,7 @@ import com.bajkic.LuanMoerFashion.Model.CartItem;
 import com.bajkic.LuanMoerFashion.Model.Customer;
 import com.bajkic.LuanMoerFashion.Model.Product;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -98,9 +99,12 @@ public class Controller {
 	}
 	
 	@GetMapping("/CartPage")
-	public ModelAndView getCartPage() {
+	public ModelAndView getCartPage(HttpSession session,HttpServletResponse response) {
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    	response.setHeader("Pragma", "no-cache");
+    	response.setDateHeader("Expires", 0);
 		ModelAndView mav = new ModelAndView("CartPage");
-		mav.addObject("productsList",productsList);
+		mav.addObject("cartItems",session.getAttribute("cartItems"));
 		return mav;
 	}
 	
@@ -135,32 +139,42 @@ public class Controller {
 		
 		session.setAttribute("cartItems",cartItems);
 		
+		  int totalPrice = cartItems.stream()
+		            .mapToInt(item -> item.getPrice() * item.getQuantity())
+		            .sum();
+		
 	    for (CartItem item : cartItems) {
+	    	System.out.println("Product image: " + item.getImageUrl());
 	        System.out.println("Product Name: " + item.getProductName());
 	        System.out.println("Product Color: " + item.getProductColor());
 	        System.out.println("Product Size: " + item.getProductSize());
-	        System.out.println("Product Price: " + item.getPrice());
+	        System.out.println("Product Price: " + totalPrice);
 	        System.out.println("Quantity: " + item.getQuantity());
 	    }
 	    
-	    int totalPrice = cartItems.stream()
-	            .mapToInt(item -> item.getPrice() * item.getQuantity())
-	            .sum();
+	  
 	    
 	    session.setAttribute("totalPrice", totalPrice);
 	    
 	}
 	
 	@PostMapping("/SendMessage")
-	public String sendMessage(@RequestParam("senderEmail") String senderEmail,@RequestParam("senderEmail") String email,@RequestParam("message")String message) throws IOException {
+	public String sendMessage(@RequestParam("firstName")String firstName,@RequestParam("lastName")String lastName,@RequestParam("senderEmail") String email,@RequestParam("message")String message) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		sb.append(email);
+		sb.append("\n");
+		sb.append(firstName);
+		sb.append("\n");
+		sb.append(lastName);
 		sb.append("\n");
 		sb.append(message);
 		eCon.sendInfo("Pitanje",sb.toString());
 		System.out.println("success");
+		System.out.println("Message received from: " + firstName + " " + lastName);
+
 		return "ContactPage";
 	}
+	
 	
 	@PostMapping("/submitUserInfo")
 	@ResponseBody
@@ -170,10 +184,16 @@ public class Controller {
 		System.out.println(session.getAttribute("customerInfo").toString());
 	}
 	
-   
-
+  
     @GetMapping("/Checkout")
-    public String showPayInfoPage(HttpSession session) {
+    public String showPayInfoPage(HttpSession session,HttpServletResponse response) {
+    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    	response.setHeader("Pragma", "no-cache");
+    	response.setDateHeader("Expires", 0);
+    	List<CartItem> cartContent = (List<CartItem>) session.getAttribute("cartItems");
+    	if(cartContent == null || cartContent.isEmpty()) {
+    		return "CartPage";
+    	}
     	System.out.println(session.getAttribute("cartItems").toString());
         return "PayInfoPage";
     }

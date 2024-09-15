@@ -23,15 +23,6 @@ public class CartItem {
 		this.price = price;
 	}
 	
-	public CartItem(String productName, String productSize, String productColor, int quantity, int price) {
-		super();
-		this.productName = productName;
-		this.productSize = productSize;
-		this.productColor = productColor;
-		this.quantity = quantity;
-		this.price = price;
-	}
-
 	
 	public String getImageUrl() {
 		return imageUrl;
@@ -73,7 +64,7 @@ public class CartItem {
 	}
 	@Override
 	public String toString() {
-		return "\nProduct name=" + productName + "\n Product size=" + productSize + "\n Product color="
+		return "\n Product image="+ imageUrl +" \nProduct name=" + productName + "\n Product size=" + productSize + "\n Product color="
 				+ productColor + "\n Quantity=" + quantity + "\n Price=" + price;
 	}
 	

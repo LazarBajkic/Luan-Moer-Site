@@ -65,3 +65,46 @@ function showBlock(buttonId,blockId,buttonIdShow,blockIdHide) {
     document.getElementById(buttonIdShow).style.visibility = 'visible';
 }
 
+
+
+document.querySelector('writeForm').addEventListener('submit', function (event) {
+    event.preventDefault(); 
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    var userInfo = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        message: message
+    };
+
+    if (!validateUserInfo(userInfo)) {
+        console.log('Validation failed');
+        return;
+    }
+
+    document.querySelector('form').submit();
+});
+
+const requiredFields = ['firstName', 'lastName', 'email', 'message'];
+
+function validateUserInfo(userInfo) {
+    let isValid = true;
+
+    requiredFields.forEach(field => {
+        const inputField = document.getElementById(field);
+        
+        if (!userInfo[field] || userInfo[field] === '') {
+            inputField.style.border = '2px solid red'; 
+            isValid = false;
+        } else {
+            inputField.style.border = ''; 
+        }
+    });
+
+    return isValid;
+}

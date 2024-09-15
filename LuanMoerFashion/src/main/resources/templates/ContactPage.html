@@ -75,18 +75,17 @@
        
         <div class="write-block" id="write-block" style="display: none;">
         	
-        <form th:action="@{/SendMessage}" method="post">
+        <form th:action="@{/SendMessage}" id="writeForm" method="post">
         		
         	<div class="fullname">
         		
-        		<input type="text" placeholder="Ime" class="credentials">
-        		<input type="text" placeholder="Prezime" class="credentials">
-        		
+        		<input type="text" name="firstName" id="firstName" placeholder="Ime" class="credentials">
+        		<input type="text" name="lastName" id="lastName" placeholder="Prezime" class="credentials">
+        	
         	</div>
-        	
-        	<input type="email" name="senderEmail" placeholder="Email" class="credentials">
-        	
-        	<textarea rows="4" name="message" placeholder="Napišite poruku" class="user-text"></textarea>
+			<input type="email" name="senderEmail" id="email" placeholder="Email" class="credentials email">
+			        	<textarea rows="4" name="message" id="message" placeholder="Napišite poruku" class="user-text"></textarea>	
+			        	
         	
         	<button type="submit" class="send-button">Pošalji</button>
         	

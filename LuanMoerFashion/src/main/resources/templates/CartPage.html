@@ -18,7 +18,11 @@
 	<h1>Korpa</h1>
 	</div>
 	
-	<div class="cart-wrapper">
+	<div th:if="${cartItems == null or #lists.isEmpty(cartItems)}" class="empty-cart-div">
+		<span>The cart is currently empty!</span>
+	</div>
+	
+	<div class="cart-wrapper"  th:if="${cartItems != null and !#lists.isEmpty(cartItems)}">
 		
 		<div class="cart-content"  th:each="item: ${cartItems}">
 			
@@ -79,13 +83,14 @@
 		
 		</div>
 		
-	</div>
-	
-	<div class="confirm-order-div">
+		<div class="confirm-order-div">
 				
 		<button type="button" class="proceed-to-payment sizeChartBtn" th:onclick="'window.location.href=\'' + @{/Checkout} + '\''">Nastavite</button>
 
 	</div>
+		
+	</div>
+	
 	
 		
 	</div>

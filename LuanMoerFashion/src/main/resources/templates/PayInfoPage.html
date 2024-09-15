@@ -45,8 +45,8 @@
 										
 					<div class="fullname-checkout">
         		
-        		<input type="text" placeholder="First name" class="credentials name-creds">
-        		<input type="text" placeholder="Last name" class="credentials lName-creds">
+        		<input type="text" placeholder="First name" class="credentials firstName-creds">
+        		<input type="text" placeholder="Last name" class="credentials lastName-creds">
         		
         	</div>
         		
@@ -61,12 +61,12 @@
 					
 					<div class="postalcode-city">
         		
-        		<input type="text" placeholder="Postal code" class="credentials pCode-creds">
+        		<input type="text" placeholder="Postal code" class="credentials postalCode-creds">
         		<input type="text" placeholder="City" class="credentials city-creds">
         		
         	</div>
 					
-					<input type="tel" placeholder="Phone number"class="credentials phone-input">
+					<input type="tel" placeholder="Phone number" class="credentials phoneNum-creds">
 					
 					<div class="save-info">
 						
@@ -100,7 +100,6 @@
 							<div class="payment-method" id="payment-method">
 							
 						<h2>Payment</h2>
-						<span>All transactions are secured and encrypted</span>
 						
 						<div class="payment-option">
 							
@@ -117,7 +116,7 @@
 				
 					<div class="action-div">
 					
-					<a> < Return to cart</a>
+					<a th:href="@{/CartPage}"> < Return to cart</a>
 					
 					<button type="button" class="continue-shipping sizeChartBtn" id="continuePayment">Continue to shipping</button>
 					
@@ -138,7 +137,6 @@
 			
 			</div>
 			
-			<span class="taxes-text">Including 2.120,00 RSD in taxes</span>
 			
 		</div>
 		

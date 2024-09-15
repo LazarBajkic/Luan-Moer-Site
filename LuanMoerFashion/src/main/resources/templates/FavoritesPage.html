@@ -11,9 +11,13 @@
 
 	<th:block th:replace="~{layout::header}"></th:block>
 	
+	<div th:if="${favoritesList == null or #lists.isEmpty(favoritesList)}" class="empty-cart-div">
+		<span>You have no favorite items yet!</span>
+	</div>
+	
 	<div class="favorites-wrapper">
 			
-		 <div class="favorite-display-div" th:each="item: ${favoritesList}">
+		 <div class="favorite-display-div" th:each="item: ${favoritesList}" th:if="${favoritesList != null and !#lists.isEmpty(favoritesList)}">
 		
 		<div class="favorite-item">
 				
@@ -27,7 +31,7 @@
 			<span class="cart-product-span"  th:text="'Veličina: '+${item.productSize}"></span>
 			<span class="cart-product-span cart-product-price" th:text="${item.productPrice}+',00 RSD'"></span>
 			
-			<form th:action="@{/AddToCart}" method="post">
+			<form th:action="@{/AddToCart}" method="post" style="margin-top:auto;">
 		        <input type="hidden" name="imageUrl" th:value="${item.imageUrl}">
 		        <input type="hidden" name="productName" th:value="${item.productName}">
 		        <input type="hidden" name="productColor" th:value="${item.productColor}">

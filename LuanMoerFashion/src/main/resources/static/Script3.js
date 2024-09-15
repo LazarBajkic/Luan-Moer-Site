@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.pCode-creds').value = savedUserInfo.postalCode;
         document.querySelector('.city-creds').value = savedUserInfo.city;
         document.querySelector('.phone-input').value = savedUserInfo.phoneNum;
+
     }
 	
 
@@ -42,15 +43,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const itemsData = Array.from(cartItems).map(item => {
         const itemInfo = item.querySelector('.cart-item-info');
         
+          const productImageUrl = item.querySelector('.item-image')?.src || 'default-image.jpg';
+        const imageUrl = productImageUrl.split('/').pop();
+
         const productName = itemInfo?.querySelector('.cart-product-name')?.textContent || 'Unknown product';
         const productColor = itemInfo?.querySelector('.cart-product-span.cart-product-color')?.textContent.split(': ')[1] || 'Unknown color';
         const productSize = itemInfo?.querySelector('.cart-product-span.cart-product-size')?.textContent.split(': ')[1] || 'Unknown size';
         const price = parseInt(itemInfo?.querySelector('.cart-product-span.cart-product-price')?.textContent.split(',')[0].replace(/[^\d]/g, ''), 10) || 0;
         const quantity = parseInt(item.querySelector('.quantity-input')?.value, 10) || 1;
 
-        console.log({ productName, productColor, productSize, price, quantity });
+        console.log({ imageUrl,productName, productColor, productSize, price, quantity });
 
         return {
+			imageUrl,
             productName,
             productColor,
             productSize,
@@ -115,58 +120,75 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-const requiredFields = ['email', 'country', 'firstName', 'lastName', 'address', 'postalCode', 'city', 'phoneNum'];
+const requiredFieldsCheckout = ['email', 'firstName', 'lastName', 'address', 'postalCode', 'city', 'phoneNum'];
 
 function validateUserInfo(userInfo) {
-    for (let field of requiredFields) {
+    let isValid = true;  
+    
+    for (let field of requiredFieldsCheckout) {
+        const inputField = document.querySelector(`.${field}-creds`);
+        
+        if (!inputField) {
+            console.error(`Field with class .${field}-creds not found`);
+            continue; 
+        }
+
         if (!userInfo[field] || userInfo[field].trim() === '') {
-            return false;
+
+            inputField.style.border = '2px solid red';
+            isValid = false;  
+        } else {
+
+            inputField.style.border = '';  
         }
     }
-    return true;
+    
+    return isValid;
 }
 
-var counter=0;
-const paymentMethod=document.getElementById('payment-method');
-document.getElementById('continuePayment').addEventListener('click',function(){
-	
-	const email = document.querySelector('.email-creds').value;
-	const firstName = document.querySelector('.name-creds').value;
-	const lastName = document.querySelector('.lName-creds').value;
-	const address = document.querySelector('.address-creds').value;
-	const apartment = document.querySelector('.flat-creds').value || null;
-	const postalCode = document.querySelector('.pCode-creds').value;
-	const city = document.querySelector('.city-creds').value;
-	const phoneNum = document.querySelector('.phone-input').value;
-	const saveinfo = document.querySelector('.saveInfo').checked;
-	
-	var userInfo = {
-	email: email,
-	country: 'Srbija',
-	firstName: firstName,
-	lastName: lastName,
-	address: address,
-	apartment: apartment,
-	postalCode: postalCode,
-	city: city,
-	phoneNum: phoneNum};
-	
-	const shippingEmail = document.querySelector('.shipping-contact-email');
-		const shippingAddress = document.querySelector('.shipping-contact-address');
-	
-	if (!validateUserInfo(userInfo)) {
-            alert('Please fill out all required fields.');
-            return; 
-        }
-	
-	if(validateUserInfo){
-		counter++;
-	}
+var counter = 0;
+const paymentMethod = document.getElementById('payment-method');
+
+document.getElementById('continuePayment').addEventListener('click', function() {
+    const email = document.querySelector('.email-creds').value;
+    const firstName = document.querySelector('.firstName-creds').value;
+    const lastName = document.querySelector('.lastName-creds').value;
+    const address = document.querySelector('.address-creds').value;
+    const apartment = document.querySelector('.flat-creds').value || null;
+    const postalCode = document.querySelector('.postalCode-creds').value;
+    const city = document.querySelector('.city-creds').value;
+    const phoneNum = document.querySelector('.phoneNum-creds').value;
+    const saveinfo = document.querySelector('.saveInfo').checked;
+
+    var userInfo = {
+        email: email,
+        country: 'Srbija',
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        apartment: apartment,
+        postalCode: postalCode,
+        city: city,
+        phoneNum: phoneNum
+    };
+
+    const shippingEmail = document.querySelector('.shipping-contact-email');
+    const shippingAddress = document.querySelector('.shipping-contact-address');
+
+    if (!validateUserInfo(userInfo)) {
+        console.log('nope')
+        return; 
+    }
+
+    if (validateUserInfo) {
+        counter++;
+    }
 	
 	if(counter==1){
 		
 		if (saveinfo) {
     		localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
 		} else {
     		localStorage.removeItem('userInfo');
 		}
@@ -218,40 +240,37 @@ if (counter == 3) {
 	
     document.getElementById("overlay").style.display = "block";
     document.getElementById('success-popup-wrapper').style.visibility = 'visible';
+ fetch('/submitUserInfo', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userInfo)
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error submitting user info');
+    }
+    return response.text().then(text => text ? JSON.parse(text) : {}); 
+})
+.then(data => {
+    console.log('User info submitted successfully:', data);
 
-    fetch('/submitUserInfo', {
+    return fetch('/sendOrder', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userInfo) 
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('User info submitted successfully:', data);
-    })
-    .catch((error) => {
-        console.error('Error submitting user info:', error);
     });
-
-    
-    setTimeout(() => {
-        fetch('/sendOrder', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Order email sent successfully');
-            } else {
-                console.error('Error sending order email:', response.statusText);
-            }
-        })
-        .catch((error) => {
-            console.error('Error sending order email:', error);
-        });
-    }, 100);
-}
 })
+.then(response => {
+    if (response.ok) {
+        console.log('Order email sent successfully');
+    } else {
+        console.error('Error sending order email:', response.statusText);
+    }
+})
+.catch((error) => {
+    console.error('Error occurred:', error);
+});
+}});

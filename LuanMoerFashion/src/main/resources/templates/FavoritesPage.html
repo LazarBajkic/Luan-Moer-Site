@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="MainCss.css">
-<meta charset="UTF-8">
+ <link rel="stylesheet" href="MainCss.css">
+ <link rel="stylesheet" href="ResponsiveCss.css">
+ 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="description" content="View your favorite products. Easily manage your favorite items and add them to your cart for quick checkout. Explore more products and shop effortlessly.">
+    <meta name="keywords" content="favorites, clothing, add to cart, fashion, shopping, stylish apparel">
+    <meta name="robots" content="index, follow">
 
-<title>Favorites</title>
+    <meta property="og:title" content="Your Favorite Items - Luan Moer">
+    <meta property="og:description" content="Browse your favorite fashion items, manage your preferences, and add products to your cart. Shop stylish apparel with ease.">
+    <meta property="og:url" content="https://example.com/favoritespage">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Your Favorite Items - Luan Moer">
+    <meta name="twitter:description" content="Browse your favorite fashion items, manage your preferences, and add products to your cart. Shop stylish apparel with ease.">
+    <meta name="twitter:image" content="URL_TO_DEFAULT_IMAGE">
+
+    <title>Favorites - Luan Moer</title>
+    
+    
 </head>
 <body>
 
@@ -21,7 +39,7 @@
 		
 		<div class="favorite-item">
 				
-		<img th:src="${item.imageUrl}">
+		<img th:src="${item.imageUrl}"  alt="Favorite item image">
 				
 					
 			<div class="favorite-info">
@@ -49,6 +67,26 @@
 	
 	<th:block th:replace="~{layout::footer}"></th:block>
 		<th:block th:replace="~{layout::Scripts}"></th:block>
-	
+	<script type="application/ld+json" th:inline="javascript">
+{
+  "@context": "https://schema.org/",
+  "@type": "ItemList",
+  "name": "Favorites",
+  "description": "User's favorite products list.",
+  "itemListElement": [
+    <th:block th:each="item, stat : ${favoritesList}">
+    {
+      "@type": "Product",
+      "name": "[[${item.productName}]]",
+      "image": "[[${item.imageUrl}]]",
+    
+        "priceCurrency": "RSD",
+        "price": "[[${item.productPrice}]]",
+      }
+    <th:if th:next="true">,</th:if>
+    </th:block>
+  ]
+}
+</script>
 </body>
 </html>

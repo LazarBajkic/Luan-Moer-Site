@@ -8,7 +8,7 @@ public class CartItem {
 	private String productColor;
 	private int quantity;
 	private int price;
-	
+	private int totalPrice;
 	public CartItem() {
 		
 	}
@@ -62,6 +62,17 @@ public class CartItem {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
+	
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "\n Product image="+ imageUrl +" \nProduct name=" + productName + "\n Product size=" + productSize + "\n Product color="

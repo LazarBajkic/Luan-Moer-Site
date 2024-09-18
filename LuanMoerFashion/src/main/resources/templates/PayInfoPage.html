@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="MainCss.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Payment</title>
+   <link rel="stylesheet" href="MainCss.css">
+   <link rel="stylesheet" href="ResponsiveCss.css">
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Payment - Checkout</title>
+    <meta name="description" content="Complete your order by providing shipping details and selecting a payment method. Secure and fast checkout.">
+    <meta name="robots" content="noindex, nofollow"> 
+    
+    <meta property="og:title" content="Payment - Secure Checkout">
+    <meta property="og:description" content="Complete your order securely by providing shipping details and selecting a payment method.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/checkout">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Payment - Checkout">
+    <meta name="twitter:description" content="Complete your order securely by providing shipping details and selecting a payment method.">
 </head>
 <body>
 	
@@ -146,7 +160,25 @@
 	
 	<th:block th:replace="~{layout::Scripts}"></th:block>
 	
-		
+		 <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CheckoutPage",
+        "name": "Payment - Checkout",
+        "url": "https://example.com/checkout",
+        "mainEntity": {
+            "@type": "Order",
+            "orderStatus": "https://schema.org/OrderPaymentDue",
+            "priceCurrency": "RSD",
+            "price": "[[${totalPrice}]]",
+            "acceptedOffer": {
+                "@type": "Offer",
+                "price": "[[${totalPrice}]]",
+                "priceCurrency": "RSD"
+            }
+        }
+    }
+    </script>
 	
 </body>
 </html>

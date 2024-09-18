@@ -3,10 +3,27 @@
 
 <head>
 <link rel="stylesheet" href="MainCss.css">
+<link rel="stylesheet" href="ResponsiveCss.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <meta charset="UTF-8">
 <title>Luan Moer</title>
+<meta name="description" content="Explore Luan Moer's fashion collections for women and men. Shop the latest trends and stylish apparel in our online store.">
+ <meta name="robots" content="index, follow">
+	
+	
+    <meta property="og:title" content="Luan Moer - Fashion Collections">
+    <meta property="og:description" content="Discover the latest fashion trends from Luan Moer. Shop stylish apparel for men and women online.">
+    <meta property="og:image" content="https://example.com/images/luan-moer-preview.jpg"> 
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Luan Moer - Fashion Collections">
+    <meta name="twitter:description" content="Explore Luan Moer's fashion collections for both men and women. Shop the latest trends online.">
+    <meta name="twitter:image" content="https://example.com/images/luan-moer-preview.jpg"> 
+    
 </head>
 <body>
 
@@ -47,6 +64,46 @@
 	
 	<th:block th:replace="~{layout::Scripts}"></th:block>
 		
+		<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "WebPage",
+  "name": "Luan Moer Fashion Store",
+  "description": "Luan Moer offers the latest in fashion collections for men and women. Explore our latest collections and contact us for more information.",
+  "url": "https://example.com", 
+  "publisher": {
+    "@type": "Organization",
+    "name": "Luan Moer",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/images/logo.png",
+      "width": 200,
+      "height": 60
+    }
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1234567890",
+    "contactType": "customer service",
+    "areaServed": "US",
+    "availableLanguage": "English"
+  },
+  "mainEntity": [
+    {
+      "@type": "CollectionPage",
+      "name": "Women Collection",
+      "url": "https://example.com/collection?gender=women",
+      "description": "Explore our Women Collection page for the latest in women's fashion."
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Men Collection",
+      "url": "https://example.com/collection?gender=men",
+      "description": "Explore our Men Collection page for the latest in men's fashion."
+    }
+  ]
+}
+</script>
 	
 </body>
 </html>

@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="MainCss.css">
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="ResponsiveCss.css">
 
-<title>Gender</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Browse our collection of men’s and women’s apparel, featuring stylish sweaters and turtlenecks. Discover your favorite new look today!">
+    <meta name="robots" content="index, follow">
+   
+    <meta property="og:title" th:content="${gender}+' Collection - Luan Moer'">
+    <meta property="og:description" th:content="'Discover the ' + ${productName} + '. Made from ' + ${materialInfo} + ', priced at ' + ${price} + '. Available in various sizes. Shop now for high-quality and stylish clothing.'">
+    <meta property="og:url" content="https://example.com/collection?gender=${gender}">
+    <meta property="og:type" content="product">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" th:content="${productName}">
+    <meta name="twitter:description" th:content="'Discover the ' + ${productName} + '. Made from ' + ${materialInfo} + ', priced at ' + ${price} + '. Available in various sizes. Shop now for high-quality and stylish clothing.'">
+    <title th:text="${gender}+' Collection - Luan Moer'"></title>
 </head>
 <body>
 

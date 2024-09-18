@@ -2,10 +2,23 @@
 <html xmlns:th="www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="MainCss.css">
+<link rel="stylesheet" href="ResponsiveCss.css">
+
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Review and manage the items in your shopping cart before proceeding to checkout. Modify quantities, remove items, and see your total cost.">
+    <meta name="robots" content="noindex, follow">
+<title>Cart - Luan Moer</title>
 
-<title>Cart</title>
+   <meta property="og:title" content="Your Shopping Cart - Luan Moer">
+    <meta property="og:description" content="Review and manage the items in your shopping cart. Modify quantities, remove items, and see your total cost before checkout.">
+    <meta property="og:url" content="https://example.com/cart">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Your Shopping Cart - Luan Moer">
+    <meta name="twitter:description" content="Manage the items in your shopping cart, modify quantities, and see your total cost before checkout.">
+ 
 </head>
 <body>
 	
@@ -31,7 +44,7 @@
 			<span class="cart-title-sub">Proizvod</span>
 			<div class="cart-item">
 			
-			<img class="item-image" th:src="${item.imageUrl}">
+			<img class="item-image" th:src="${item.imageUrl}" alt="Product Image">
 			
 			<div class="cart-item-info">
 			
@@ -52,7 +65,7 @@
 				<div class="quantity-div">
 					<div class="quantity-input-div">
 					  <button class="quantity-btn minus">-</button>
-        			  <input type="number" class="quantity-input" value="1" min="1">
+        			  <input type="number" class="quantity-input" th:value="${item.quantity}" min="1">
         			  <button class="quantity-btn plus">+</button>
 					</div>
 					
@@ -73,7 +86,9 @@
 				<span class="cart-title-sub">Ukupno</span>
 			
 			<div class="total-div">
-				<span class="current-product-total"th:text="${item.price}+',00 RSD'"></span>
+						<span class="current-product-total"
+          th:text="${totalPrice != null ? (item.totalPrice + ',00 RSD') : (item.price + ',00 RSD')}">
+    </span>
 			</div>
 			
 			</div>
@@ -96,6 +111,33 @@
 	</div>
 	<th:block th:replace="~{layout::footer}"></th:block>
 	<th:block th:replace="~{layout::Scripts}"></th:block>
-
+	
+	 <script type="application/ld+json" th:inline="javascript">
+    {
+      "@context": "https://schema.org/",
+      "@type": "WebPage",
+      "name": "Shopping Cart",
+      "description": "Your shopping cart where you can review and modify your selected items before checkout.",
+      "url": "https://example.com/cart",
+      "mainEntity": {
+        "@type": "ShoppingCart",
+        "name": "Cart",
+        "description": "The cart contains items selected by the user for purchase.",
+        "offers": [
+          <th:block th:each="item : ${cartItems}">
+          {
+            "@type": "Offer",
+            "name": "[[${item.productName}]]",
+            "priceCurrency": "RSD",
+            "price": "[[${item.price}]]"
+          }<th:if th:next="true">,</th:if>
+          </th:block>
+        ],
+        "totalPrice": "[[${totalPrice}]]",
+        "priceCurrency": "RSD"
+      }
+    }
+    </script>
+	
 </body>
 </html>

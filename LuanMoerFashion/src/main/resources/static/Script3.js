@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const productSize = itemInfo?.querySelector('.cart-product-span.cart-product-size')?.textContent.split(': ')[1] || 'Unknown size';
         const price = parseInt(itemInfo?.querySelector('.cart-product-span.cart-product-price')?.textContent.split(',')[0].replace(/[^\d]/g, ''), 10) || 0;
         const quantity = parseInt(item.querySelector('.quantity-input')?.value, 10) || 1;
-
         console.log({ imageUrl,productName, productColor, productSize, price, quantity });
 
         return {
@@ -76,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch((error) => console.error('Error:', error));
     }
 
+	
+
     if (cartWrapper) {
         updateTotalPrice();
 
@@ -95,8 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         if (button.classList.contains('plus')) {
                             quantity += 1;
+
                         } else if (button.classList.contains('minus') && quantity > 1) {
                             quantity -= 1;
+
                         }
 
                         inputField.value = quantity;
@@ -110,9 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        
+        
                 const proceedToPaymentButton = document.querySelector('.continue-shipping');
         if (proceedToPaymentButton) {
             proceedToPaymentButton.addEventListener('click', function() {
+				
                 sendCartItemsToBackend();
             });
         }

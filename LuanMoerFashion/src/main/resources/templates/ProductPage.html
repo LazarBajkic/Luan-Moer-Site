@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="MainCss.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="MainCss.css">
+      <link rel="stylesheet" href="ResponsiveCss.css">
+      
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" th:content="'Discover the ' + ${productName} + '. Made from ' + ${materialInfo} + ', priced at ' + ${price} + '. Available in various sizes. Shop now for high-quality and stylish clothing.'">
+    <meta name="robots" content="index, follow">
 
-<title>Product name</title>
-</head>
+    <title th:text="${productName}"></title>
+
+    <meta property="og:title" th:content="${productName}">
+    <meta property="og:description" th:content="'Discover the ' + ${productName} + '. Made from ' + ${materialInfo} + ', priced at ' + ${price} + '. Available in various sizes. Shop now for high-quality and stylish clothing.'">
+    <meta property="og:url" content="https://example.com/productinfo?name=${name}">
+    <meta property="og:type" content="product">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" th:content="${productName}">
+    <meta name="twitter:description" th:content="'Discover the ' + ${productName} + '. Made from ' + ${materialInfo} + ', priced at ' + ${price} + '. Available in various sizes. Shop now for high-quality and stylish clothing.'">
+    <meta name="twitter:image" th:content="${mainImageUrl}">
+    
+    </head>
 <body>
 
 	<th:block th:replace="~{layout::header}"></th:block>
@@ -46,7 +61,22 @@
     
 	<th:block th:replace="~{layout::footer}"></th:block>
 	<th:block th:replace="~{layout::Scripts}"></th:block>
-		
+		 <script type="application/ld+json" th:inline="javascript">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "[[${productName}]]",
+      "image": "[[${mainImageUrl}]]",
+      "description": "Discover the [[${productName}]] made from [[${materialInfo}]].",
+      "sku": "D12345",
+      "brand": {
+        "@type": "Brand",
+        "name": "Luan Moer"
+      },
+      "material": "[[${materialInfo}]]"
+      
+    }
+    </script>
 
 </body>
 </html>

@@ -100,11 +100,13 @@ public class Controller {
 	
 	@GetMapping("/CartPage")
 	public ModelAndView getCartPage(HttpSession session,HttpServletResponse response) {
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    	response.setHeader("Pragma", "no-cache");
-    	response.setDateHeader("Expires", 0);
+		
+		
 		ModelAndView mav = new ModelAndView("CartPage");
-		mav.addObject("cartItems",session.getAttribute("cartItems"));
+			
+			mav.addObject("cartItems",session.getAttribute("cartItems"));
+			mav.addObject("totalPrice",session.getAttribute("totalPrice"));		
+		
 		return mav;
 	}
 	
@@ -115,7 +117,7 @@ public class Controller {
 		List<CartItem> list = (List<CartItem>) session.getAttribute("cartItems");
 		
 		ModelAndView mav = new ModelAndView("CartPage");
-		synchronized(productsList) {
+		synchronized(list) {
 			 for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
 			        CartItem p = iterator.next();
 			        if (p.getProductName().equals(productName) &&
@@ -139,23 +141,23 @@ public class Controller {
 		
 		session.setAttribute("cartItems",cartItems);
 		
-		  int totalPrice = cartItems.stream()
-		            .mapToInt(item -> item.getPrice() * item.getQuantity())
-		            .sum();
+
+		int totalPrice=0;
 		
 	    for (CartItem item : cartItems) {
+	    	totalPrice = item.getQuantity()*item.getPrice();
 	    	System.out.println("Product image: " + item.getImageUrl());
 	        System.out.println("Product Name: " + item.getProductName());
 	        System.out.println("Product Color: " + item.getProductColor());
 	        System.out.println("Product Size: " + item.getProductSize());
 	        System.out.println("Product Price: " + totalPrice);
 	        System.out.println("Quantity: " + item.getQuantity());
+	        
+	        item.setTotalPrice(totalPrice);
 	    }
 	    
-	  
-	    
 	    session.setAttribute("totalPrice", totalPrice);
-	    
+	    	    
 	}
 	
 	@PostMapping("/SendMessage")
@@ -212,10 +214,9 @@ public class Controller {
 		}else {
 			
 			
-			CartItem p = new CartItem(imageUrl,productName,productColor,productSize,1,productPrice);
-			System.out.println(p.toString());
-			cartItems.add(p);
 			
+			CartItem c = new CartItem(imageUrl,productName,productColor,productSize,1,productPrice);
+			cartItems.add(c);
 		}
 		
 		return mav;

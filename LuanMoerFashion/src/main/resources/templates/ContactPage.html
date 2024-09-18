@@ -2,10 +2,25 @@
 <html xmlns:th="www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="MainCss.css">
+    <link rel="stylesheet" href="ResponsiveCss.css">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="Get in touch with us for any questions or support. Find answers to frequently asked questions or contact us directly.">
+    <meta name="robots" content="index, follow">
     
-    <title>Contact</title>
+    <title>Contact us - Luan Moer</title>
+  <meta property="og:title" content="Contact Us - Luan Moer">
+    <meta property="og:description" content="Reach out to Luan Moer for any questions or support. We're here to assist you with your inquiries.">
+    <meta property="og:url" content="https://example.com/contact">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Us - Luan Moer">
+    <meta name="twitter:description" content="Got questions or need help? Contact Luan Moer for support or find answers to frequently asked questions.">
+
+	
+	
 </head>
 <body>
 
@@ -27,7 +42,7 @@
              <div class="faq-item">
             	<div class="faq-question">
             		<span>Pitanje 1</span>
-            		<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            		<img src="arrow.png" class="arrow" alt="Arrow icon" style="height:24px; width:24px;">
             </div>
                 <div class="faq-answer">Odgovor 1</div>
             </div>
@@ -35,7 +50,7 @@
             <div class="faq-item">
             	<div class="faq-question">
             		<span>Pitanje 2</span>
-            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            			<img src="arrow.png" class="arrow" alt="Arrow icon" style="height:24px; width:24px;">
             </div>
                 <div class="faq-answer">Odgovor 2</div>
             </div>
@@ -43,7 +58,7 @@
             <div class="faq-item">
             	<div class="faq-question">
             		<span>Pitanje 3</span>
-            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            			<img src="arrow.png" class="arrow" alt="Arrow icon" style="height:24px; width:24px;">
             </div>
                 <div class="faq-answer">Odgovor 3</div>
             </div>
@@ -51,7 +66,7 @@
             <div class="faq-item">
             	<div class="faq-question">
             		<span>Pitanje 4</span>
-            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            			<img src="arrow.png" class="arrow" alt="Arrow icon" style="height:24px; width:24px;">
             </div>
                 <div class="faq-answer">Odgovor 4</div>
             </div>
@@ -59,7 +74,7 @@
             <div class="faq-item">
             	<div class="faq-question">
             		<span>Pitanje 5</span>
-            			<img src="arrow.png" class="arrow" style="height:24px; width:24px;">
+            			<img src="arrow.png" class="arrow" alt="Arrow icon" style="height:24px; width:24px;">
             </div>
                 <div class="faq-answer">Odgovor 5</div>
             </div>
@@ -103,6 +118,22 @@
 
     <th:block th:replace="~{layout::footer}"></th:block>
 	<th:block th:replace="~{layout::Scripts}"></th:block>
-
+	
+	 <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "WebPage",
+      "name": "Contact Us",
+      "description": "Contact page where users can find answers to frequently asked questions or send us a message.",
+      "url": "https://example.com/contact",
+      "mainEntity": {
+        "@type": "ContactPage",
+        "contactType": "Customer Support",
+        "email": "info@example.com"
+      }
+    }
+    </script>
+	
+	
 </body>
 </html>

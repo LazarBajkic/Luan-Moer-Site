@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
             totalCartPrice += finalPriceNumber;
         });
 
-        console.log('Total Cart Price:', totalCartPrice);
-
         localStorage.setItem('totalCartPrice', totalCartPrice);
     }
 
@@ -45,13 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
           const productImageUrl = item.querySelector('.item-image')?.src || 'default-image.jpg';
         const imageUrl = productImageUrl.split('/').pop();
+        imageUrl = imageUrl.split('/').pop();
 
         const productName = itemInfo?.querySelector('.cart-product-name')?.textContent || 'Unknown product';
         const productColor = itemInfo?.querySelector('.cart-product-span.cart-product-color')?.textContent.split(': ')[1] || 'Unknown color';
         const productSize = itemInfo?.querySelector('.cart-product-span.cart-product-size')?.textContent.split(': ')[1] || 'Unknown size';
         const price = parseInt(itemInfo?.querySelector('.cart-product-span.cart-product-price')?.textContent.split(',')[0].replace(/[^\d]/g, ''), 10) || 0;
         const quantity = parseInt(item.querySelector('.quantity-input')?.value, 10) || 1;
-        console.log({ imageUrl,productName, productColor, productSize, price, quantity });
 
         return {
 			imageUrl,
@@ -126,9 +124,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-const requiredFieldsCheckout = ['email', 'firstName', 'lastName', 'address', 'postalCode', 'city', 'phoneNum'];
+var counter = 0;
+const paymentMethod = document.getElementById('payment-method');
 
-function validateUserInfo(userInfo) {
+document.getElementById('continuePayment').addEventListener('click', function() {
+    const email = document.querySelector('.email-creds').value;
+    const firstName = document.querySelector('.firstName-creds').value;
+    const lastName = document.querySelector('.lastName-creds').value;
+    const address = document.querySelector('.address-creds').value;
+    const apartment = document.querySelector('.flat-creds').value || null;
+    const postalCode = document.querySelector('.postalCode-creds').value;
+    const city = document.querySelector('.city-creds').value;
+    const phoneNum = document.querySelector('.phoneNum-creds').value;
+    const saveinfo = document.querySelector('.saveInfo').checked;
+
+	const requiredFieldsCheckout = ['email', 'firstName', 'lastName', 'address', 'postalCode', 'city', 'phoneNum'];
+
+	
+	function validateUserInfo(userInfo) {
     let isValid = true;  
     
     for (let field of requiredFieldsCheckout) {
@@ -151,21 +164,7 @@ function validateUserInfo(userInfo) {
     
     return isValid;
 }
-
-var counter = 0;
-const paymentMethod = document.getElementById('payment-method');
-
-document.getElementById('continuePayment').addEventListener('click', function() {
-    const email = document.querySelector('.email-creds').value;
-    const firstName = document.querySelector('.firstName-creds').value;
-    const lastName = document.querySelector('.lastName-creds').value;
-    const address = document.querySelector('.address-creds').value;
-    const apartment = document.querySelector('.flat-creds').value || null;
-    const postalCode = document.querySelector('.postalCode-creds').value;
-    const city = document.querySelector('.city-creds').value;
-    const phoneNum = document.querySelector('.phoneNum-creds').value;
-    const saveinfo = document.querySelector('.saveInfo').checked;
-
+	
     var userInfo = {
         email: email,
         country: 'Srbija',

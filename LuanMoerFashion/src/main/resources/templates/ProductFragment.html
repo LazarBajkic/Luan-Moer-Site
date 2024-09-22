@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="info-buttons">
-                    <form th:action="@{/AddToCart}" method="post" style="width:90%; align-items:center;">
+                    <form th:action="@{/CartPage}" method="post" style="width:90%; align-items:center;">
                         <input type="hidden" name="imageUrl" th:value="${mainImageUrl}">
                         <input type="hidden" name="productName" th:value="${productName}">
                         <input type="hidden" name="productColor">

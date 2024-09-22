@@ -87,7 +87,7 @@
 			
 			<div class="total-div">
 						<span class="current-product-total"
-          th:text="${totalPrice != null ? (item.totalPrice + ',00 RSD') : (item.price + ',00 RSD')}">
+          th:text="${item.totalPrice != 0 ? (item.totalPrice + ',00 RSD') : (item.price + ',00 RSD')}">
     </span>
 			</div>
 			

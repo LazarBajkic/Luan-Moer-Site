@@ -67,30 +67,10 @@ function showBlock(buttonId,blockId,buttonIdShow,blockIdHide) {
 
 
 
-document.querySelector('writeForm').addEventListener('submit', function (event) {
+document.getElementById('writeForm').addEventListener('submit', function (event) {
     event.preventDefault(); 
 
-    const firstName = document.getElementById('firstName').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    var userInfo = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        message: message
-    };
-
-    if (!validateUserInfo(userInfo)) {
-        console.log('Validation failed');
-        return;
-    }
-
-    document.querySelector('form').submit();
-});
-
-const requiredFields = ['firstName', 'lastName', 'email', 'message'];
+	const requiredFields = ['firstName', 'lastName', 'email', 'message'];
 
 function validateUserInfo(userInfo) {
     let isValid = true;
@@ -108,3 +88,24 @@ function validateUserInfo(userInfo) {
 
     return isValid;
 }
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    var userInfo = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        message: message
+    };
+
+    if (!validateUserInfo(userInfo)) {
+        console.log('Validation failed');
+        return;
+    }else{
+	    document.querySelector('form').submit();	
+	}
+
+});

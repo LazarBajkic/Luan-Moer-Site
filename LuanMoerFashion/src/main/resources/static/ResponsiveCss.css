@@ -12,6 +12,10 @@
 		
 	}
 	
+	.success-popup-wrapper{
+		width:100%;
+	}
+	
 	.postalcode-city input,
 	.fullname-checkout input{
 		width:100% !important;
@@ -24,9 +28,38 @@
 	.products-in-cart{
 		margin-top:30%;
 	}
+
+	#sizeSelect{
+		margin-left:0;
+		margin-top:5%;
+		margin-bottom:5%;
+	}
+
+	.size-price{
+		flex-direction:column;
+	}
+	
+	 .shipping-info-div{
+   		width:45vw;
+   }
+   
+   .shipping-address,.shipping-contact,
+     .shipping-address input,.shipping-contact input,
+       .change-button{
+   		font-size:1.3rem;
+
+   }
+   
+   .shipping-address span,.shipping-contact span{
+			align-self:center;
+			text-align:center;
+	
+	}
+
 }
 
 @media (max-width: 1400px) {
+  
    
    .favorites-wrapper{
    		margin-top:10% !important;
@@ -135,7 +168,13 @@
     .NavBar {
         padding: 0.75rem;
     }
-
+	
+	 .shipping-address,.shipping-contact,
+     .shipping-address input,.shipping-contact input,
+       .change-button{
+   		font-size:1.1rem;
+   }
+	
     .navbar-brand {
         font-size: 1.5rem;
         margin-left:0; 
@@ -401,6 +440,15 @@
     .cart-item-info {
         margin-left: 0;
     }
+    
+     .shipping-address,.shipping-contact{
+		flex-direction: column;
+	}
+      .shipping-address input,.shipping-contact input{
+		align-self:center;
+		width:100%;
+	}
+    
 }
 
 @media (max-width: 768px) {
@@ -492,6 +540,10 @@
 			width:100%;
 		}
 		
+		 .cart-section{
+    	margin-top:20%;
+    }
+    
 		
 		.product-image-sub img{
 				max-width:100vw;
@@ -619,6 +671,12 @@
 }
 
 @media (max-width: 576px) {
+      
+      .continue-shipping{
+      	width:40vw;
+      	height:5vh;
+      }
+    
       
        .NavBar {
         flex-direction: column;
@@ -757,6 +815,10 @@
 
 @media(max-width:556px){
 	
+	 .cart-section{
+    	margin-top:45%;
+    }
+	
     .write-block {
     	margin-top:0;
         width: 60vw;
@@ -779,6 +841,24 @@
 
 @media (min-width:200px) and (max-width: 465px) {
     
+    .success-popup,.success-popup-wrapper{
+    	width:100%;
+    }
+    
+    #sizeChartPopup{
+    	width:80vw;
+    }
+	
+	
+	 .shipping-info-div{
+		width:80vw;
+		
+	}
+	
+	.confirm-order-div{
+		align-items:center;
+	}
+
    	.product-wrapper{
 		width:100%;
 				max-width:100vw;

@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedColor = document.querySelector('input[name="colorSelection"]:checked')?.value || '';
         const selectedSize = document.querySelector('select[name="productSize"]').value;
 
-        const cartForm = document.querySelector('form[action="/AddToCart"]');
+        const cartForm = document.querySelector('form[action="/CartPage"]');
         if (cartForm) {
             const colorInputInCart = cartForm.querySelector('input[name="productColor"]');
             const sizeInputInCart = cartForm.querySelector('input[name="productSize"]');
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (sizeInputInCart) sizeInputInCart.value = selectedSize;
         }
 
-        const favoritesForm = document.querySelector('form[action="/AddToFavorites"]');
+        const favoritesForm = document.getElementById('favorites-form');
         if (favoritesForm) {
             const colorInputInFavorites = favoritesForm.querySelector('input[name="productColor"]');
             const sizeInputInFavorites = favoritesForm.querySelector('input[name="productSize"]');
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (validateInputs()) {
             updateHiddenFields();
-            const cartForm = document.querySelector('form[action="/AddToCart"]');
+            const cartForm = document.querySelector('form[action="/CartPage"]');
             if (cartForm) {
                 cartForm.submit(); 
             }
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (validateInputs()) {
             updateHiddenFields();
-            const favoritesForm = document.querySelector('form[action="/AddToFavorites"]');
+            const favoritesForm = document.getElementById('favorites-form');
             if (favoritesForm) {
                 favoritesForm.submit(); 
             }

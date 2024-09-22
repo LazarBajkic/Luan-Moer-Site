@@ -75,7 +75,7 @@ public class CartItem {
 
 	@Override
 	public String toString() {
-		return "\n Product image="+ imageUrl +" \nProduct name=" + productName + "\n Product size=" + productSize + "\n Product color="
+		return "\n Product name=" + productName + "\n Product size=" + productSize + "\n Product color="
 				+ productColor + "\n Quantity=" + quantity + "\n Price=" + price;
 	}
 	

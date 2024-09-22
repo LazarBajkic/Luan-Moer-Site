@@ -1,10 +1,11 @@
 <html xmlns:th="www.thymeleaf.org">
 
 <th:block th:fragment="Scripts">
-    <script src="Script.js"></script>
-    <script src="Script2.js"></script>
-    <script src="Script3.js"></script>
-    <script src="Script4.js"></script>
+    
+    <script th:src="@{/scripts/CheckoutScript.js}"></script>
+    <script th:src="@{/scripts/ContactScript.js}"></script>
+    <script th:src="@{/scripts/Favorites&SizeChart.js}"></script>
+    <script th:src="@{/scripts/NavBarScript.js}"></script>
     
 </th:block>
 </html>

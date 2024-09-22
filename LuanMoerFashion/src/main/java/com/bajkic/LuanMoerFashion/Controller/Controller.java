@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bajkic.LuanMoerFashion.APIController.EmailController;
 import com.bajkic.LuanMoerFashion.Model.CartItem;
@@ -67,9 +68,11 @@ public class Controller {
 	
 	@GetMapping("/ProductInfo")
 	public ModelAndView getProduct(@RequestParam("name") String name,HttpSession session) {
+		
 		ModelAndView mav = new ModelAndView("ProductPage");
 		session.setAttribute("name", name);
 		mav.addObject("name", name);
+		mav.addObject("favoritesList",session.getAttribute("favoritesList"));
 		return mav;
 	}
 	
@@ -111,12 +114,11 @@ public class Controller {
 	}
 	
 	@PostMapping("/RemoveFromCart")
-	public ModelAndView removeFromCart(@RequestParam("productName") String productName,@RequestParam("productColor") String productColor,
-			@RequestParam("productSize")String productSize,HttpSession session) {
+	public String removeFromCart(@RequestParam("productName") String productName,@RequestParam("productColor") String productColor,
+			@RequestParam("productSize")String productSize,HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		List<CartItem> list = (List<CartItem>) session.getAttribute("cartItems");
 		
-		ModelAndView mav = new ModelAndView("CartPage");
 		synchronized(list) {
 			 for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
 			        CartItem p = iterator.next();
@@ -130,8 +132,8 @@ public class Controller {
 			
 		}
 
-		 	mav.addObject("productsList", productsList);
-			return mav;
+		 	redirectAttributes.addAttribute("productsList", productsList);
+			return "CartPage";
 	}
 	
 	
@@ -163,6 +165,7 @@ public class Controller {
 	@PostMapping("/SendMessage")
 	public String sendMessage(@RequestParam("firstName")String firstName,@RequestParam("lastName")String lastName,@RequestParam("senderEmail") String email,@RequestParam("message")String message) throws IOException {
 		StringBuilder sb = new StringBuilder();
+		
 		sb.append(email);
 		sb.append("\n");
 		sb.append(firstName);
@@ -200,15 +203,15 @@ public class Controller {
         return "PayInfoPage";
     }
 	 
-	@PostMapping("/AddToCart")
-	public ModelAndView addToCart(@RequestParam("imageUrl")String imageUrl,
+	@PostMapping("/CartPage")
+	public String addToCart(@RequestParam("imageUrl")String imageUrl,
 							@RequestParam("productName") String productName,
 							@RequestParam("productColor") String productColor,
 							@RequestParam("productSize")String productSize,
-							@RequestParam("productPrice") int productPrice, @ModelAttribute("cartItems") List<CartItem> cartItems,HttpSession session) {
-		ModelAndView mav = new ModelAndView("ProductPage");
+							@RequestParam("productPrice") int productPrice, @ModelAttribute("cartItems") List<CartItem> cartItems,HttpSession session, RedirectAttributes redirectAttributes) {
+
 		String name = (String) session.getAttribute("name");
-		mav.addObject("name", name);
+		redirectAttributes.addAttribute("name", name);
 		if(productColor.equals("")||productSize.equals("")) {
 			System.out.println("error");
 		}else {
@@ -219,7 +222,7 @@ public class Controller {
 			cartItems.add(c);
 		}
 		
-		return mav;
+		return "CartPage";
 	}
 	
 	@PostMapping("/sendOrder")
@@ -242,22 +245,21 @@ public class Controller {
 	
 	
 	@PostMapping("/AddToFavorites")
-	public ModelAndView addToFavorites(@RequestParam("imageUrl") String imageUrl,
+	public String addToFavorites(@RequestParam("imageUrl") String imageUrl,
 	                              @RequestParam("productName") String productName,
 	                              @RequestParam("productColor") String productColor,
 	                              @RequestParam("productSize") String productSize,
 	                              @RequestParam("productPrice") int productPrice,
-	                              HttpSession session) {
+	                              HttpSession session,RedirectAttributes redirectAttributes) {
 
 	    List<Product> favoritesList = (List<Product>) session.getAttribute("favoritesList");
-	    
+
 	    if(favoritesList == null) {
 	    	favoritesList = Collections.synchronizedList(new ArrayList<>());
 	    }
 	    
-	    ModelAndView mav = new ModelAndView("ProductPage");
 	    String name = (String) session.getAttribute("name");
-	    mav.addObject("name", name);
+	    redirectAttributes.addAttribute("name", name);
 	    
 	    if (productColor.isEmpty() || productSize.isEmpty()) {
 	        System.out.println("error");
@@ -266,8 +268,10 @@ public class Controller {
 	        favoritesList.add(p);
 	        session.setAttribute("favoritesList", favoritesList);
 	    }
-
-	    return mav;
+	    
+	    session.getAttribute("favoritesList");
+	    
+	    return "redirect:/FavoritesPage";
 	}
 	
 	@GetMapping("/getFavoritesList")

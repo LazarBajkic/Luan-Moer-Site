@@ -1,2 +1,11 @@
 User-agent: *
-Disallow: /
+
+Disallow: /CartPage
+Disallow: /FavoritesPage
+Disallow: /Checkout
+
+Allow: /
+Allow: /CollectionSelection
+Allow: /Collection
+Allow: /ProductInfo
+Allow: /ContactPage

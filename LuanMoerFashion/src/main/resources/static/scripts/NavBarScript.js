@@ -39,12 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const totalPriceElement = document.querySelector('.right-side-text.bold');
+const subtotalPriceElement = document.querySelector('.right-side-text.subtotal');
+
     if (totalPriceElement) {
 
         const totalCartPrice = localStorage.getItem('totalCartPrice');
         if (totalCartPrice) {
             totalPriceElement.textContent = totalCartPrice + ',00 RSD';
+            subtotalPriceElement.textContent = totalCartPrice + ',00 RSD';
         } else {
             totalPriceElement.textContent = '0,00 RSD';
+            subtotalPriceElement.textContent = totalCartPrice + '0,00 RSD';
         }
     }

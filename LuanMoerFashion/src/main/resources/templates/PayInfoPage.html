@@ -117,7 +117,7 @@
 						
 						<div class="payment-option">
 							
-							<input type="radio" id="selectedOption">
+							<input type="radio" id="selectedOption" checked disabled>
 							<span>Plaćanje pouzećem</span>
 							
 						</div>
@@ -143,7 +143,7 @@
 			<div class="price-before-shipping">
 				
 				<span>Subtotal</span>
-				<span class="right-side-text" th:text="${totalPrice} + ',00 RSD'"></span>
+				<span class="right-side-text subtotal" th:text="${totalPrice} + ',00 RSD'"></span>
 				<span>Shipping</span>
 				<span class="right-side-text">Calculated at next step</span>
 				<span class="bold">Total</span>

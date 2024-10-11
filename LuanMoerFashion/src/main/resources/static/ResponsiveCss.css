@@ -841,6 +841,21 @@
 
 @media (min-width:200px) and (max-width: 465px) {
     
+     .NavBar {
+        flex-direction: column;
+        height:8vh;
+        padding-top:5%;
+        padding-bottom:5%;
+    }
+    
+    .collection-select{
+    	padding-top:30%;
+    }
+    
+    .favorites-wrapper{
+    	margin-top:30% !important;
+    }
+    
     .success-popup,.success-popup-wrapper{
     	width:100%;
     }

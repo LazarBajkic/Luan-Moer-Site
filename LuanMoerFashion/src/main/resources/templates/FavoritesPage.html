@@ -49,7 +49,7 @@
 			<span class="cart-product-span"  th:text="'Veličina: '+${item.productSize}"></span>
 			<span class="cart-product-span cart-product-price" th:text="${item.productPrice}+',00 RSD'"></span>
 			
-			<form th:action="@{/AddToCart}" method="post" style="margin-top:auto;">
+			<form th:action="@{/CartPage}" method="post" style="margin-top:auto;">
 		        <input type="hidden" name="imageUrl" th:value="${item.imageUrl}">
 		        <input type="hidden" name="productName" th:value="${item.productName}">
 		        <input type="hidden" name="productColor" th:value="${item.productColor}">
